@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DREAMS OF THE FUTURE</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-main: #05050a;
+      --bg-card: #0d0b18;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #ff007f;
+      --neon-yellow: #ffe600;
+      --neon-green: #00ff66;
+      --border-color: #ff007f;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--neon-cyan);
+      font-family: 'VT323', monospace;
+      text-transform: uppercase;
+      overflow-x: hidden;
+    }
+
+    /* Estilos de la Intro */
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #intro-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .skip-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      font-family: 'VT323', monospace;
+      font-size: 1.5rem;
+      background-color: rgba(5, 5, 10, 0.9);
+      color: var(--neon-yellow);
+      border: 2px solid var(--neon-yellow);
+      padding: 8px 20px;
+      cursor: pointer;
+      z-index: 100000;
+      box-shadow: 0 0 10px var(--neon-yellow);
+      transition: all 0.2s;
+    }
+
+    .skip-btn:hover {
+      background-color: var(--neon-yellow);
+      color: #000;
+      box-shadow: 0 0 15px var(--neon-yellow);
+    }
+
+    /* Navegación */
+    nav {
+      background-color: #000000;
+      border-bottom: 2px solid var(--neon-pink);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
+    }
+
+    /* Portada / Hero con Video de Fondo */
+    .hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: 3px solid var(--neon-pink);
+      overflow: hidden;
+    }
+
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 10, 0.75);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .badge {
+      border: 1px dashed var(--neon-yellow);
+      padding: 2px 8px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--neon-yellow);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--neon-green) !important;
+      text-shadow: 3px 3px 0px var(--neon-cyan), 0 0 10px var(--neon-green);
+      margin-bottom: 5px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      color: var(--neon-green);
+      margin-bottom: 25px;
+    }
+
+    .subtitle-box {
+      border: 1px solid var(--neon-cyan);
+      padding: 5px 15px;
+      font-size: 1.3rem;
+      color: var(--neon-cyan);
+      background-color: rgba(13, 11, 24, 0.9);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+
+    /* Contenedor General de Secciones */
+    .section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--neon-pink);
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--neon-cyan);
+      display: inline-block;
+      padding-bottom: 5px;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .section-desc {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      color: var(--neon-yellow);
+    }
+
+    /* Tarjetas de características */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      border: 1px solid var(--neon-cyan);
+      padding: 20px 15px;
+      background-color: var(--bg-card);
+      text-align: left;
+      box-shadow: 4px 4px 0px var(--neon-pink);
+    }
+
+    .feature-card h3 {
+      font-size: 1.6rem;
+      color: var(--neon-yellow);
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      text-transform: none;
+    }
+
+    /* Galería de Fotos */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .photos-grid .photo-box {
+      border: 1px solid var(--neon-green);
+      height: 200px;
+      background-color: var(--bg-card);
+      box-shadow: 3px 3px 0px var(--neon-cyan);
+      overflow: hidden;
+    }
+
+    .photos-grid .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Trailer */
+    .trailer-box {
+      border: 2px solid var(--neon-pink);
+      aspect-ratio: 16/9;
+      width: 100%;
+      max-width: 700px;
+      margin: 20px auto 0 auto;
+      background-color: var(--bg-card);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.2);
+      overflow: hidden;
+    }
+
+    .trailer-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speed-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .speed-label {
+      font-size: 1.2rem;
+      color: var(--neon-yellow);
+    }
+
+    .speed-btn {
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      background-color: var(--bg-card);
+      color: var(--neon-cyan);
+      border: 1px solid var(--neon-cyan);
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .speed-btn:hover, .speed-btn.active {
+      background-color: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    /* SECCIÓN DESCARGAR */
+    .download-container {
+      position: relative;
+      margin: 100px auto 180px auto;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .beta-title {
+      font-size: 2.8rem;
+      color: var(--neon-yellow);
+      text-shadow: 2px 2px 0px #000, 0 0 10px var(--neon-yellow);
+      margin-bottom: 220px;
+      letter-spacing: 2px;
+    }
+
+    .download-box-wrapper {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .download-border-rgb {
+      position: absolute;
+      inset: -4px;
+      border-radius: 6px;
+      padding: 4px;
+      background: transparent;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .download-border-rgb::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(#ff007f, #00f3ff, #00ff66, #ffe600, #ff007f);
+      animation: rotateRGB 3s linear infinite;
+    }
+
+    .download-border-rgb::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #000;
+      border-radius: 4px;
+    }
+
+    .download-btn {
+      position: relative;
+      z-index: 3;
+      font-family: 'VT323', monospace;
+      font-size: 3rem;
+      background-color: var(--neon-pink);
+      color: #000;
+      border: none;
+      padding: 16px 60px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .download-btn:hover {
+      background-color: var(--neon-yellow);
+      color: #000;
+      box-shadow: 0 0 20px var(--neon-yellow);
+    }
+
+    .arrows-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 4;
+      animation: spinRing 8s linear infinite;
+    }
+
+    .arrow-item {
+      position: absolute;
+      font-size: 4rem;
+      font-weight: bold;
+      line-height: 1;
+      width: 1em;
+      height: 1em;
+      top: -0.5em;
+      left: -0.5em;
+      animation: colorShiftRGB 2s linear infinite;
+    }
+
+    .arrow-item:nth-child(1) { transform: rotate(0deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(2) { transform: rotate(45deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(3) { transform: rotate(90deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(4) { transform: rotate(135deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(5) { transform: rotate(180deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(6) { transform: rotate(225deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(7) { transform: rotate(270deg) translate(220px) rotate(180deg); }
+    .arrow-item:nth-child(8) { transform: rotate(315deg) translate(220px) rotate(180deg); }
+
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateRGB {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes colorShiftRGB {
+      0% { color: #ff007f; text-shadow: 0 0 12px #ff007f; }
+      25% { color: #00f3ff; text-shadow: 0 0 12px #00f3ff; }
+      50% { color: #00ff66; text-shadow: 0 0 12px #00ff66; }
+      75% { color: #ffe600; text-shadow: 0 0 12px #ffe600; }
+      100% { color: #ff007f; text-shadow: 0 0 12px #ff007f; }
+    }
+
+    /* Créditos / Equipo */
+    .team-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 600px;
+      margin: 30px auto 0 auto;
+    }
+
+    .team-card {
+      border: 1px solid var(--neon-pink);
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      background-color: var(--bg-card);
+    }
+
+    .team-info h4 {
+      font-size: 1.6rem;
+      color: var(--neon-cyan);
+    }
+
+    .team-info .role {
+      font-size: 1.1rem;
+      background-color: var(--neon-yellow);
+      color: #000;
+      font-weight: bold;
+      display: inline-block;
+      padding: 0 6px;
+      margin: 3px 0;
+    }
+
+    .team-info p {
+      font-size: 1rem;
+      color: #cccccc;
+      text-transform: none;
+      margin-top: 5px;
+    }
+
+    .team-avatar {
+      width: 60px;
+      height: 60px;
+      border: 2px solid var(--neon-cyan);
+      background-color: #1a002c;
+      flex-shrink: 0;
+      margin-left: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="intro-overlay">
+    <video id="intro-video" autoplay muted playsinline>
+      <source src="intro.mp4" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
+    </video>
+    <button class="skip-btn" type="button" onclick="closeIntro()">SALTAR INTRO [X]</button>
+  </div>
+
+  <nav>
+    <a href="#inicio">INICIO</a>
+    <a href="#sinopsis">SINOPSIS</a>
+    <a href="#fotos">FOTOS</a>
+    <a href="#trailer">TRAILER</a>
+    <a href="#descargar">DESCARGAR</a>
+    <a href="novedades/novedades.html">NOVEDADES</a>
+    <a href="#equipo">EQUIPO</a>
+  </nav>
+
+  <header id="inicio" class="hero">
+    <video id="bienvenida-video" class="hero-video-bg" autoplay loop muted playsinline preload="auto">
+      <source src="bienvenida.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">PRIME</div>
+      <h1>DREAMS OF THE FUTURE</h1>
+      <h2>PRIME</h2>
+      <div class="subtitle-box">EL FUTURO DEL JUEGO ESTA EN TUS MANOS</div>
+    </div>
+  </header>
+
+  <section id="sinopsis" class="section">
+    <h2 class="section-title">SINOPSIS</h2>
+    <p class="section-desc">Encuentra lo que está escondido en este mundo.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Historia</h3>
+        <p>DREAMS OF THE FUTURE está repleto de una narrativa envolvente y secretos por descubrir...</p>
+      </div>
+      <div class="feature-card">
+        <h3>Mini Juegos</h3>
+        <p>Explora el mundo para completar desafíos alternativos e historias secundarias.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Misterios y Combate</h3>
+        <p>Enfréntate a combates estratégicos que pondrán a prueba tus reflejos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fotos" class="section">
+    <h2 class="section-title">FOTOS DEL JUEGO</h2>
+    <div class="photos-grid">
+      <div class="photo-box">
+        <img src="foto1.jpg" alt="Captura 1">
+      </div>
+      <div class="photo-box">
+        <img src="foto2.jpg" alt="Captura 2">
+      </div>
+      <div class="photo-box">
+        <img src="foto3.jpg" alt="Captura 3">
+      </div>
+    </div>
+  </section>
+
+  <section id="trailer" class="section">
+    <h2 class="section-title">TRAILER OFICIAL</h2>
+    <div class="trailer-box">
+      <video id="main-video" controls preload="metadata">
+        <source src="trailer.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video HTML5.
+      </video>
+    </div>
+
+    <div class="speed-controls">
+      <span class="speed-label">VELOCIDAD:</span>
+      <button class="speed-btn active" onclick="setVideoSpeed(1, this)">1x</button>
+      <button class="speed-btn" onclick="setVideoSpeed(1.5, this)">1.5x</button>
+      <button class="speed-btn" onclick="setVideoSpeed(2, this)">2x</button>
+    </div>
+  </section>
+
+  <section id="descargar" class="section download-container">
+    <h2 class="beta-title">¡¡¡¡¡DESCARGAR YA LA BETA DEL JUEGO!!!!!</h2>
+    
+    <div class="download-box-wrapper">
+      <div class="download-border-rgb"></div>
+      <a href="juego.zip" download class="download-btn">DESCARGAR</a>
+      
+      <div class="arrows-ring">
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+        <span class="arrow-item">&#10140;</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" class="section">
+    <h2 class="section-title">CONOCE AL EQUIPO</h2>
+    
+    <div class="team-list">
+      <div class="team-card">
+        <div class="team-info">
+          <h4>AXWEB</h4>
+          <span class="role">WEB DEVELOPER</span>
+          <p>Encargado del desarrollo de este sitio web. Se especializa en crear interfaces dinámicas y con estilo retro-futurista.</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-info">
+          <h4>AXEL GOMEZ</h4>
+          <span class="role">GAME DIRECTOR / PROGRAMADOR</span>
+          <p>Es la persona que tiene la visión general del juego y se asegura de que todo (programación, diseño, arte, música) se sienta como un solo producto coherente.</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-info">
+          <h4>JERONIMO PINTO</h4>
+          <span class="role">MÚSICA</span>
+          <p>Compositor / Musicalizador: Se encarga de crear las canciones, loops y bandas sonoras (OST) que le dan ambiente y ritmo al juego.</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-info">
+          <h4>LUCAS FERNANDEZ</h4>
+          <span class="role">LEVEL DESIGNER</span>
+          <p>Planifica y construye el espacio jugable. Decide dónde van los obstáculos, los caminos, las zonas de combate y las plataformas.</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-info">
+          <h4>ELIAN PENZ</h4>
+          <span class="role">PIXEL ARTIST</span>
+          <p>Responsable de crear toda la identidad visual del juego dibujando elementos gráficos digitales píxel por píxel.</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-info">
+          <h4>SIRIA LOPEZ</h4>
+          <span class="role">ARTISTA DE SPRITES</span>
+          <p>Diseña los personajes y sus animaciones cuadro por cuadro, dando vida al mundo de "Dreams of the Future".</p>
+        </div>
+        <div class="team-avatar"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const introOverlay = document.getElementById('intro-overlay');
+    const introVideo = document.getElementById('intro-video');
+    const bienvenidaVideo = document.getElementById('bienvenida-video');
+
+    if (bienvenidaVideo) {
+      bienvenidaVideo.playbackRate = 2.0;
+      bienvenidaVideo.addEventListener('play', () => {
+        bienvenidaVideo.playbackRate = 2.0;
+      });
+    }
+
+    function closeIntro() {
+      if (introVideo) {
+        introVideo.pause();
+        introVideo.currentTime = 0;
+      }
+      if (introOverlay) {
+        introOverlay.style.display = 'none';
+      }
+    }
+
+    if (introVideo) {
+      introVideo.addEventListener('ended', closeIntro);
+    }
+
+    function setVideoSpeed(speed, btn) {
+      const video = document.getElementById('main-video');
+      if (video) {
+        video.playbackRate = speed;
+      }
+
+      const buttons = document.querySelectorAll('.speed-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
