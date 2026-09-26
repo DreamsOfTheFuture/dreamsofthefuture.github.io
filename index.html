@@ -6,6 +6,15 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>DREAMS OF THE FUTURE</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- SCRIPT ANTI-DESTALLOS (FOUC): Se ejecuta antes de que se dibuje la página -->
+  <script>
+    if (sessionStorage.getItem('introVistas') === 'true') {
+      // Inyectamos CSS de inmediato para ocultar el overlay desde el milisegundo 0
+      document.write('<style>#intro-overlay { display: none !important; }</style>');
+    }
+  </script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -611,6 +620,7 @@
     const introVideo = document.getElementById('intro-video');
     const bienvenidaVideo = document.getElementById('bienvenida-video');
 
+    // Manejo de la velocidad del video del Hero
     if (bienvenidaVideo) {
       bienvenidaVideo.playbackRate = 2.0;
       bienvenidaVideo.addEventListener('play', () => {
@@ -626,12 +636,32 @@
       if (introOverlay) {
         introOverlay.style.display = 'none';
       }
+      // Guardamos la marca de que la intro ya fue vista en esta sesión
+      sessionStorage.setItem('introVistas', 'true');
     }
 
-    if (introVideo) {
-      introVideo.addEventListener('ended', closeIntro);
-      introVideo.addEventListener('error', closeIntro);
-    }
+    // Evaluación al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      const yaVisto = sessionStorage.getItem('introVistas') === 'true';
+
+      if (yaVisto) {
+        // Si ya fue vista, destruimos el video de intro para no consumir RAM ni red
+        if (introVideo) {
+          introVideo.pause();
+          introVideo.removeAttribute('src'); // Detiene la descarga del mp4
+          introVideo.load();
+        }
+        if (introOverlay) {
+          introOverlay.style.display = 'none';
+        }
+      } else {
+        // Primera vez en esta sesión: asignamos los eventos
+        if (introVideo) {
+          introVideo.addEventListener('ended', closeIntro);
+          introVideo.addEventListener('error', closeIntro);
+        }
+      }
+    });
   </script>
 </body>
 </html>
