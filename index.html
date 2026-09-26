@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>DREAMS OF THE FUTURE</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
@@ -245,7 +246,7 @@
       display: block;
     }
 
-    /* Trailer */
+    /* Trailer YouTube Embed */
     .trailer-box {
       border: 2px solid var(--neon-pink);
       aspect-ratio: 16/9;
@@ -257,40 +258,10 @@
       overflow: hidden;
     }
 
-    .trailer-box video {
+    .trailer-box iframe {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-
-    .speed-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .speed-label {
-      font-size: 1.2rem;
-      color: var(--neon-yellow);
-    }
-
-    .speed-btn {
-      font-family: 'VT323', monospace;
-      font-size: 1.2rem;
-      background-color: var(--bg-card);
-      color: var(--neon-cyan);
-      border: 1px solid var(--neon-cyan);
-      padding: 4px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .speed-btn:hover, .speed-btn.active {
-      background-color: var(--neon-cyan);
-      color: #000;
-      box-shadow: 0 0 8px var(--neon-cyan);
+      border: none;
     }
 
     /* SECCIÓN DESCARGAR */
@@ -339,6 +310,7 @@
       height: 200%;
       background: conic-gradient(#ff007f, #00f3ff, #00ff66, #ffe600, #ff007f);
       animation: rotateRGB 3s linear infinite;
+      will-change: transform;
     }
 
     .download-border-rgb::after {
@@ -380,6 +352,7 @@
       pointer-events: none;
       z-index: 4;
       animation: spinRing 8s linear infinite;
+      will-change: transform;
     }
 
     .arrow-item {
@@ -414,11 +387,11 @@
     }
 
     @keyframes colorShiftRGB {
-      0% { color: #ff007f; text-shadow: 0 0 12px #ff007f; }
-      25% { color: #00f3ff; text-shadow: 0 0 12px #00f3ff; }
-      50% { color: #00ff66; text-shadow: 0 0 12px #00ff66; }
-      75% { color: #ffe600; text-shadow: 0 0 12px #ffe600; }
-      100% { color: #ff007f; text-shadow: 0 0 12px #ff007f; }
+      0% { color: #ff007f; }
+      25% { color: #00f3ff; }
+      50% { color: #00ff66; }
+      75% { color: #ffe600; }
+      100% { color: #ff007f; }
     }
 
     /* Créditos / Equipo */
@@ -529,13 +502,13 @@
     <h2 class="section-title">FOTOS DEL JUEGO</h2>
     <div class="photos-grid">
       <div class="photo-box">
-        <img src="foto1.jpg" alt="Captura 1">
+        <img src="foto1.jpg" alt="Captura de pantalla de la jugabilidad 1">
       </div>
       <div class="photo-box">
-        <img src="foto2.jpg" alt="Captura 2">
+        <img src="foto2.jpg" alt="Captura de pantalla de la jugabilidad 2">
       </div>
       <div class="photo-box">
-        <img src="foto3.jpg" alt="Captura 3">
+        <img src="foto3.jpg" alt="Captura de pantalla de la jugabilidad 3">
       </div>
     </div>
   </section>
@@ -543,17 +516,13 @@
   <section id="trailer" class="section">
     <h2 class="section-title">TRAILER OFICIAL</h2>
     <div class="trailer-box">
-      <video id="main-video" controls preload="metadata">
-        <source src="trailer.mp4" type="video/mp4">
-        
-      </video>
-    </div>
-
-    <div class="speed-controls">
-      <span class="speed-label">VELOCIDAD:</span>
-      <button class="speed-btn active" onclick="setVideoSpeed(1, this)">1x</button>
-      <button class="speed-btn" onclick="setVideoSpeed(1.5, this)">1.5x</button>
-      <button class="speed-btn" onclick="setVideoSpeed(2, this)">2x</button>
+      <iframe 
+        src="https://www.youtube-nocookie.com/embed/8dC62WXCBJ4" 
+        title="Dreams Of The Future Presenta......" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
     </div>
   </section>
 
@@ -583,7 +552,7 @@
     <div class="team-list">
       <div class="team-card">
         <div class="team-info">
-          <h4>AXEL AYALA</h4>
+          <h4>AXWEB</h4>
           <span class="role">WEB DEVELOPER</span>
           <p>Encargado del desarrollo de este sitio web. Se especializa en crear interfaces dinámicas y con estilo retro-futurista.</p>
         </div>
@@ -661,17 +630,7 @@
 
     if (introVideo) {
       introVideo.addEventListener('ended', closeIntro);
-    }
-
-    function setVideoSpeed(speed, btn) {
-      const video = document.getElementById('main-video');
-      if (video) {
-        video.playbackRate = speed;
-      }
-
-      const buttons = document.querySelectorAll('.speed-btn');
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      introVideo.addEventListener('error', closeIntro);
     }
   </script>
 </body>
