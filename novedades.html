@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVEDADES - DREAMS OF THE FUTURE</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-main: #05050a;
+      --bg-card: #0d0b18;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #ff007f;
+      --neon-yellow: #ffe600;
+      --neon-green: #00ff66;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--neon-cyan);
+      font-family: 'VT323', monospace;
+      text-transform: uppercase;
+      overflow-x: hidden;
+    }
+
+    /* Navegación */
+    nav {
+      background-color: #000000;
+      border-bottom: 2px solid var(--neon-pink);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 8px var(--neon-yellow);
+    }
+
+    /* Contenedor Principal */
+    .section {
+      padding: 50px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-size: 3.5rem;
+      color: var(--neon-green);
+      text-align: center;
+      text-shadow: 3px 3px 0px var(--neon-cyan), 0 0 10px var(--neon-green);
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--neon-yellow);
+      margin-bottom: 40px;
+    }
+
+    /* Feed de Novedades */
+    .news-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .news-card {
+      border: 1px solid var(--neon-cyan);
+      background-color: var(--bg-card);
+      padding: 25px;
+      box-shadow: 5px 5px 0px var(--neon-pink);
+      position: relative;
+    }
+
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed var(--neon-pink);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .news-tag {
+      background-color: var(--neon-pink);
+      color: #000;
+      font-weight: bold;
+      padding: 2px 8px;
+      font-size: 1rem;
+    }
+
+    .news-date {
+      color: var(--neon-yellow);
+      font-size: 1.1rem;
+    }
+
+    .news-card h3 {
+      font-size: 2rem;
+      color: var(--neon-cyan);
+      margin-bottom: 10px;
+    }
+
+    .news-card p {
+      font-size: 1.2rem;
+      color: #e0e0e0;
+      text-transform: none;
+      line-height: 1.4;
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 40px;
+      font-family: 'VT323', monospace;
+      font-size: 1.5rem;
+      color: #000;
+      background-color: var(--neon-yellow);
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px var(--neon-yellow);
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: var(--neon-cyan);
+      box-shadow: 0 0 15px var(--neon-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../Dreams Of The Future.html#inicio">INICIO</a>
+    <a href="../Dreams Of The Future.html#sinopsis">SINOPSIS</a>
+    <a href="../Dreams Of The Future.html#fotos">FOTOS</a>
+    <a href="../Dreams Of The Future.html#trailer">TRAILER</a>
+    <a href="../Dreams Of The Future.html#descargar">DESCARGAR</a>
+    <a href="novedades.html" class="active">NOVEDADES</a>
+    <a href="../Dreams Of The Future.html#equipo">EQUIPO</a>
+  </nav>
+
+  <main class="section">
+    <h1 class="page-title">NOVEDADES Y NOTICIAS</h1>
+    <p class="page-subtitle">Últimas actualizaciones sobre el desarrollo de Dreams of the Future</p>
+
+    <div class="news-feed">
+      
+      <article class="news-card">
+        <div class="news-header">
+          <span class="news-tag">New</span>
+          <span class="news-date">03/09/2026</span>
+        </div>
+        <h3>ESTAMOS A PUNTO DE LANZAR LA BETA</h3>
+        <p>Preparense</p>
+      </article>
+
+    </div>
+
+    <div style="text-align: center;">
+      <a href="../Dreams Of The Future.html" class="btn-back">&#8592; VOLVER AL INICIO</a>
+    </div>
+  </main>
+
+</body>
+</html>
