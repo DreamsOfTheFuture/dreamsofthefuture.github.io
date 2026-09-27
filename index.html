@@ -9,12 +9,12 @@
   <!-- FAVICON / ICONO DE LA PESTAÑA -->
   <link rel="icon" type="image/jpeg" href="icono.jpg">
 
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <!-- FUENTES RETRO Y VOXEL -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   
-  <!-- SCRIPT ANTI-DESTALLOS (FOUC): Se ejecuta antes de que se dibuje la página -->
+  <!-- SCRIPT ANTI-DESTALLOS (FOUC) -->
   <script>
     if (sessionStorage.getItem('introVistas') === 'true') {
-      // Inyectamos CSS de inmediato para ocultar el overlay desde el milisegundo 0
       document.write('<style>#intro-overlay { display: none !important; }</style>');
     }
   </script>
@@ -141,7 +141,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 5, 10, 0.75);
+      background: rgba(5, 5, 10, 0.82);
       z-index: 2;
     }
 
@@ -151,28 +151,42 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 0 20px;
     }
 
     .badge {
       border: 1px dashed var(--neon-yellow);
       padding: 2px 8px;
       font-size: 1rem;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       color: var(--neon-yellow);
     }
 
+    /* ESTILO 3D VOXEL SIN DESENFOQUE PARA EL TÍTULO */
     .hero h1 {
-      font-size: 4rem;
-      line-height: 1;
-      color: var(--neon-green) !important;
-      text-shadow: 3px 3px 0px var(--neon-cyan), 0 0 10px var(--neon-green);
-      margin-bottom: 5px;
+      font-family: 'Press Start 2P', cursive, monospace;
+      font-size: 2.8rem;
+      line-height: 1.4;
+      color: #72ec36;
+      max-width: 900px;
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+      text-shadow: 
+        1px 1px 0px #3ea119,
+        2px 2px 0px #3ea119,
+        3px 3px 0px #2a7310,
+        4px 4px 0px #2a7310,
+        5px 5px 0px #1a490a,
+        6px 6px 0px #1a490a,
+        7px 7px 0px #0b2403,
+        8px 8px 12px rgba(0, 0, 0, 0.95);
     }
 
     .hero h2 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       color: var(--neon-green);
       margin-bottom: 25px;
+      text-shadow: 2px 2px 0px #000;
     }
 
     .subtitle-box {
@@ -565,7 +579,7 @@
     <div class="team-list">
       <div class="team-card">
         <div class="team-info">
-          <h4>AXWEB</h4>
+          <h4>AXEL AYALA</h4>
           <span class="role">WEB DEVELOPER</span>
           <p>Encargado del desarrollo de este sitio web. Se especializa en crear interfaces dinámicas y con estilo retro-futurista.</p>
         </div>
@@ -624,7 +638,6 @@
     const introVideo = document.getElementById('intro-video');
     const bienvenidaVideo = document.getElementById('bienvenida-video');
 
-    // Manejo de la velocidad del video del Hero
     if (bienvenidaVideo) {
       bienvenidaVideo.playbackRate = 2.0;
       bienvenidaVideo.addEventListener('play', () => {
@@ -640,26 +653,22 @@
       if (introOverlay) {
         introOverlay.style.display = 'none';
       }
-      // Guardamos la marca de que la intro ya fue vista en esta sesión
       sessionStorage.setItem('introVistas', 'true');
     }
 
-    // Evaluación al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
       const yaVisto = sessionStorage.getItem('introVistas') === 'true';
 
       if (yaVisto) {
-        // Si ya fue vista, destruimos el video de intro para no consumir RAM ni red
         if (introVideo) {
           introVideo.pause();
-          introVideo.removeAttribute('src'); // Detiene la descarga del mp4
+          introVideo.removeAttribute('src');
           introVideo.load();
         }
         if (introOverlay) {
           introOverlay.style.display = 'none';
         }
       } else {
-        // Primera vez en esta sesión: asignamos los eventos
         if (introVideo) {
           introVideo.addEventListener('ended', closeIntro);
           introVideo.addEventListener('error', closeIntro);
