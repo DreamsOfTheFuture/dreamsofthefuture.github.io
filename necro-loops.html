@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVEDADES - DREAMS OF THE FUTURE</title>
+  <title>NECRO LOOPS - Subjuego Oficial | Dreams Of The Future</title>
 
-  <!-- Favicon (Icono de la pestaña) -->
-  <link rel="icon" type="image/jpeg" href="icono.jpg">
+  <!-- Favicon / Icono de la Pestaña -->
+  <link rel="icon" href="icono.jpg" type="image/jpeg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,13 +21,9 @@
     :root {
       --bg-main: #121218;
       --bg-card: #1a1a24;
-      --bg-card-hover: #242432;
       --accent-white: #ffffff;
-      --accent-silver: #c0c0d0;
-      --accent-gray: #707085;
       --border-light: rgba(255, 255, 255, 0.85);
       --border-dim: rgba(255, 255, 255, 0.25);
-      --glow-white: rgba(255, 255, 255, 0.4);
     }
 
     * {
@@ -75,7 +71,7 @@
       pointer-events: none;
     }
 
-    /* Gothic Gray-White Custom Containers */
+    /* Gothic Custom Containers */
     .gothic-card {
       background: linear-gradient(135deg, rgba(26, 26, 36, 0.95), rgba(18, 18, 24, 0.95));
       border: 2px solid var(--border-dim);
@@ -87,7 +83,7 @@
 
     .gothic-card:hover {
       border-color: var(--accent-white);
-      transform: translateY(-4px) scale(1.005);
+      transform: translateY(-5px) scale(1.01);
       box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.05);
     }
 
@@ -97,7 +93,7 @@
       box-shadow: inset 0 0 0 3px #121218, inset 0 0 0 5px #ffffff, 0 0 25px rgba(255, 255, 255, 0.2);
     }
 
-    /* Animated Gothic Headers */
+    /* Title Styling */
     .title-gothic {
       font-family: 'Cinzel', serif;
       letter-spacing: 6px;
@@ -113,13 +109,13 @@
       100% { filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.8)); }
     }
 
-    /* Modern Retro RPG Button */
+    /* Retro RPG Button */
     .rpg-btn {
       font-family: 'Press Start 2P', cursive;
       background-color: #1a1a24;
       color: #ffffff;
       border: 2px solid #ffffff;
-      padding: 16px 32px;
+      padding: 14px 28px;
       cursor: pointer;
       position: relative;
       transition: all 0.25s ease;
@@ -133,21 +129,6 @@
       overflow: hidden;
     }
 
-    .rpg-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: 0.5s;
-    }
-
-    .rpg-btn:hover::before {
-      left: 100%;
-    }
-
     .rpg-btn:hover {
       background-color: #ffffff;
       color: #121218;
@@ -155,19 +136,14 @@
       transform: translate(-3px, -3px);
     }
 
-    .rpg-btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px #ffffff;
-    }
-
-    /* Core Icon Diamond Glyph */
+    /* Diamond Glyph Icon */
     .core-icon {
       display: inline-block;
       width: 12px;
       height: 12px;
       background-color: #ffffff;
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .rpg-btn:hover .core-icon {
@@ -175,7 +151,31 @@
       transform: rotate(90deg) scale(1.3);
     }
 
-    /* Three Dots Dropdown Menu Styles */
+    /* Lightbox Cards */
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--border-dim);
+      transition: all 0.3s ease;
+    }
+
+    .photo-card:hover {
+      border-color: #ffffff;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+    }
+
+    .photo-card img {
+      filter: grayscale(20%) contrast(110%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      filter: grayscale(0%) contrast(105%);
+      transform: scale(1.08);
+    }
+
+    /* Menu Dropdown */
     #dots-dropdown {
       transform-origin: top left;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -209,7 +209,7 @@
     <div class="relative">
       <button 
         id="dots-menu-btn" 
-        onclick="toggleDotsMenu()" 
+        onclick="toggleDotsMenu(event)" 
         class="flex items-center gap-3 px-4 py-2 border-2 border-white/70 bg-[#1a1a24] hover:bg-white hover:text-black text-white transition-all font-['Press_Start_2P'] text-xs tracking-wider shadow-[3px_3px_0px_#fff]"
         title="Opciones y Accesos Rápidos"
       >
@@ -228,46 +228,44 @@
         </div>
 
         <div class="space-y-2.5">
+          <!-- REGRESAR AL HUB -->
+          <a 
+            href="index.html" 
+            onclick="playSfx('select')" 
+            class="flex items-center justify-between p-2.5 border border-white/80 bg-[#222230] hover:bg-white hover:text-black transition-all group"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="text-sm">🏠</span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight">HUB PRINCIPAL</span>
+            </div>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">IR ➔</span>
+          </a>
 
-          <!-- ENLACE A NOVEDADES (ACTIVO) -->
+          <!-- ENLACE A NOVEDADES -->
           <a 
             href="novedades.html" 
             onclick="playSfx('select')" 
-            class="flex items-center justify-between p-2.5 border-2 border-white bg-white text-black font-bold transition-all"
+            class="flex items-center justify-between p-2.5 border border-white/80 bg-[#222230] hover:bg-white hover:text-black transition-all group"
           >
             <div class="flex items-center gap-2.5">
               <span class="text-sm">📰</span>
               <span class="font-['Press_Start_2P'] text-[10px] tracking-tight">NOVEDADES</span>
             </div>
-            <span class="text-[9px] bg-black text-white px-1.5 py-0.5">AQUÍ</span>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">VER ➔</span>
           </a>
 
           <div class="border-t border-white/20 my-2"></div>
 
-          <div class="text-[10px] text-gray-400 mb-1 font-bold">// SUBJUEGOS EN COMPUS:</div>
+          <div class="text-[10px] text-gray-400 mb-1 font-bold">// SUBJUEGO ACTUAL:</div>
 
-          <!-- SUBGAME 1: NECRO LOOPS -->
-          <a 
-            href="necro-loops.html" 
-            onclick="playSfx('select')" 
-            class="flex items-center justify-between p-2.5 border border-white/80 bg-[#222230] hover:bg-white hover:text-black transition-all group"
-          >
+          <!-- SUBGAME ACTIVE: NECRO LOOPS -->
+          <div class="flex items-center justify-between p-2.5 border-2 border-white bg-[#2a2a3a]">
             <div class="flex items-center gap-2.5">
-              <span class="core-icon group-hover:bg-black"></span>
-              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight">NECRO LOOPS</span>
+              <span class="core-icon bg-white"></span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight text-white">NECRO LOOPS</span>
             </div>
-            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">JUGAR ➔</span>
-          </a>
-
-          <!-- SUBGAME 2: LOCKED -->
-          <div class="flex items-center justify-between p-2.5 border border-dashed border-gray-600 bg-black/30 opacity-60">
-            <div class="flex items-center gap-2">
-              <span class="text-gray-500">🔒</span>
-              <span class="font-['Press_Start_2P'] text-[10px] text-gray-400">PROYECTO SECTOR 7</span>
-            </div>
-            <span class="text-[9px] text-gray-500 font-mono">PRÓXIMAMENTE</span>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5">ACTIVO</span>
           </div>
-
         </div>
 
         <div class="mt-4 pt-3 border-t border-white/20 text-[10px] text-gray-400 text-center">
@@ -278,93 +276,173 @@
 
     <!-- MAIN NAV LINKS -->
     <div class="hidden lg:flex gap-8 text-gray-300 font-['Press_Start_2P'] text-[11px]">
-      <a href="index.html#inicio" onclick="playSfx('select')" class="hover:text-white transition-colors">INICIO</a>
-      <a href="index.html#sinopsis" onclick="playSfx('select')" class="hover:text-white transition-colors">SINOPSIS</a>
-      <a href="index.html#gameplay" onclick="playSfx('select')" class="hover:text-white transition-colors">GAMEPLAY</a>
-      <a href="index.html#fotos" onclick="playSfx('select')" class="hover:text-white transition-colors">FOTOS</a>
-      <a href="index.html#descargar" onclick="playSfx('select')" class="hover:text-white transition-colors">DESCARGAR</a>
-      <a href="novedades.html" class="text-white border-b-2 border-white pb-1">NOVEDADES</a>
-      <a href="index.html#equipo" onclick="playSfx('select')" class="hover:text-white transition-colors">EQUIPO</a>
+      <a href="index.html" onclick="playSfx('select')" class="hover:text-white transition-colors">◄ INICIO HUB</a>
+      <a href="#sinopsis" onclick="playSfx('select')" class="hover:text-white transition-colors">SINOPSIS</a>
+      <a href="#gameplay" onclick="playSfx('select')" class="hover:text-white transition-colors">GAMEPLAY</a>
+      <a href="#fotos" onclick="playSfx('select')" class="hover:text-white transition-colors">CAPTURAS</a>
     </div>
 
     <!-- RIGHT BADGE -->
     <div>
-      <span class="font-['Silkscreen'] text-xs border-2 border-white px-3 py-1 bg-[#1a1a24] text-white shadow-[2px_2px_0px_#fff]">SYSTEM LOGS</span>
+      <span class="font-['Silkscreen'] text-xs border-2 border-white px-3 py-1 bg-[#1a1a24] text-white shadow-[2px_2px_0px_#fff]">SUBJUEGO #01</span>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT SECTION -->
-  <main class="max-w-4xl mx-auto px-6 py-16 z-10 relative">
-    
-    <!-- PAGE TITLE -->
-    <div class="text-center mb-16">
-      <div class="inline-block border border-white/80 px-4 py-1.5 mb-4 text-xs tracking-widest font-['Press_Start_2P'] text-gray-300 bg-[#1a1a24]/90 shadow-md">
-        * ARCHIVO DE TRANSMISIONES Y BOLETINES *
-      </div>
-      <h1 class="title-gothic text-4xl sm:text-6xl font-black mb-3">
-        NOVEDADES Y NOTICIAS
-      </h1>
+  <!-- HERO SECTION NECRO LOOPS -->
+  <section class="relative min-h-[45vh] flex flex-col justify-center items-center text-center px-4 py-16 z-10 border-b border-white/20">
+    <div class="inline-block border border-white/80 px-4 py-1.5 mb-6 text-xs tracking-widest font-['Press_Start_2P'] text-gray-200 bg-[#1a1a24]/90 shadow-md">
+      * COMPUTE TERMINAL SUBGAME *
+    </div>
+
+    <h1 class="title-gothic text-4xl sm:text-6xl md:text-7xl font-black mb-3 leading-tight">
+      NECRO LOOPS
+    </h1>
+    <p class="font-['Press_Start_2P'] text-sm sm:text-base text-gray-300 max-w-2xl leading-relaxed mb-8">
+      MINIJUEGO ACCESIBLE DESDE LAS COMPUTADORAS INTERACTIVAS DEL RPG.
+    </p>
+
+    <a href="index.html" onclick="playSfx('btn')" class="rpg-btn">
+      <span class="core-icon"></span>
+      VOLVER AL HUB PRINCIPAL
+    </a>
+  </section>
+
+  <!-- SECCIÓN SINOPSIS -->
+  <section id="sinopsis" class="max-w-4xl mx-auto px-6 py-16 z-10 relative border-b border-white/20">
+    <div class="text-center mb-10">
+      <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">SINOPSIS DEL JUEGO</h2>
       <div class="h-1 w-24 bg-white mx-auto mb-4"></div>
-      <p class="text-xl md:text-2xl text-gray-300 font-mono">
-        ÚLTIMAS ACTUALIZACIONES SOBRE EL DESARROLLO DE DREAMS OF THE FUTURE
+      <p class="text-2xl text-gray-300">REGISTRO DE DATOS Y TRAMA PRINCIPAL</p>
+    </div>
+
+    <div class="gothic-card p-8 text-gray-200 leading-relaxed font-mono space-y-4">
+      <div class="flex items-center justify-between border-b border-white/30 pb-3 text-xs text-gray-400">
+        <span>// ARCHIVO_DE_DATOS_#004</span>
+        <span class="text-white font-bold">[ACCESO CONCEDIDO]</span>
+      </div>
+      
+      <p class="text-lg leading-relaxed">
+        <strong class="text-white font-['Cinzel'] text-xl">NECRO LOOPS</strong> es una experiencia de acción retro inmersiva oculta en el universo de <em>Dreams Of The Future</em>. Accesible a través de las terminales de computadora repartidas por el mundo del RPG, traslada al jugador a un bucle temporal infinito dentro de un entorno cibernético abandonado.
       </p>
+
+      <p class="text-lg leading-relaxed">
+        Atrapado en esta red corrupta, deberás sobrevivir a oleadas impredecibles de anomalías digitales y secuencias espectrales, utilizando mecánicas de reflejo rápido mientras descifras los fragmentos de memoria perdidos del sistema.
+      </p>
+
+      <div class="pt-4 border-t border-white/20 flex flex-wrap gap-4 text-xs font-['Press_Start_2P'] text-gray-300">
+        <span class="border border-white/50 px-3 py-1 bg-black/40">GÉNERO: ARCADE / SUBJUEGO</span>
+        <span class="border border-white/50 px-3 py-1 bg-black/40">MODO: UN JUGADOR</span>
+        <span class="border border-white/50 px-3 py-1 bg-black/40">UBICACIÓN: TERMINALES RPG</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMEPLAY Y YOUTUBE LINK CON FALLBACK INTELIGENTE -->
+  <section id="gameplay" class="max-w-4xl mx-auto px-6 py-20 z-10 relative border-b border-white/20">
+    <div class="text-center mb-12">
+      <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">GAMEPLAY EN VIVO</h2>
+      <div class="h-1 w-24 bg-white mx-auto mb-4"></div>
+      <p class="text-2xl text-gray-300">DEMOSTRACIÓN DE JUGABILIDAD DE NECRO LOOPS</p>
     </div>
 
-    <!-- NEWS FEED CONTAINER -->
-    <div class="space-y-8 mb-16">
+    <div class="gothic-box-double p-3 bg-[#121218] relative">
+      <div id="yt-container" class="aspect-video w-full relative bg-black flex flex-col justify-center items-center">
+        <!-- IFRAME DE YOUTUBE -->
+        <iframe 
+          id="yt-iframe"
+          class="w-full h-full border border-white/50" 
+          src="https://www.youtube-nocookie.com/embed/8dC62WXCBJ4?rel=0" 
+          title="Necro Loops Gameplay Video" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
 
-      <!-- CARD DE NOTICIA 1 -->
-      <article class="gothic-card p-8 border-2 border-white/80">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/30 pb-4 mb-6 gap-2">
-          <div class="flex items-center gap-3">
-            <span class="bg-white text-black font-['Press_Start_2P'] text-[10px] font-bold px-3 py-1">
-              [NEW] LATEST
-            </span>
-            <span class="font-['Press_Start_2P'] text-xs text-white">ANUNCIO OFICIAL</span>
-          </div>
-          <span class="font-mono text-base text-gray-300 border border-white/20 px-2 py-0.5 bg-[#121218]">
-            📅 03/09/2026
-          </span>
+      <!-- BOTONES Y ESTADO -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4 px-2 text-xs text-gray-300 font-mono">
+        <div class="flex items-center gap-2">
+          <span>ESTADO:</span>
+          <span class="animate-pulse text-white font-bold">● NECRO_LOOPS_DEMO.MP4</span>
         </div>
 
-        <h3 class="font-['Cinzel'] text-2xl md:text-3xl text-white font-bold mb-4 tracking-wide">
-          ESTAMOS A PUNTO DE LANZAR LA BETA
-        </h3>
-
-        <p class="text-xl md:text-2xl text-gray-200 normal-case leading-relaxed font-mono">
-          Prepárense. Todo el equipo de desarrollo está ultimando los últimos detalles para liberar la versión jugable para todos los usuarios.
-        </p>
-
-        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-gray-400 font-mono">
-          <span>PUBLICADO POR: AXEL GOMEZ & EQUIPO</span>
-          <span class="flex items-center gap-1.5"><span class="core-icon"></span> ESTADO: ACTIVO</span>
+        <div class="flex gap-2">
+          <a 
+            href="https://youtu.be/8dC62WXCBJ4" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            onclick="playSfx('btn')" 
+            class="px-3 py-1.5 border border-white/80 bg-[#1a1a24] hover:bg-white hover:text-black font-['Press_Start_2P'] text-[9px] transition-all"
+          >
+            ▶ VER EN YOUTUBE ↗
+          </a>
         </div>
-      </article>
+      </div>
+    </div>
+  </section>
 
+  <!-- GALERÍA DE FOTOS (foto4.jpg, foto5.jpg, foto6.jpg) -->
+  <section id="fotos" class="max-w-6xl mx-auto px-6 py-20 z-10 relative border-b border-white/20">
+    <div class="text-center mb-16">
+      <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">CAPTURAS DEL SUBJUEGO</h2>
+      <div class="h-1 w-24 bg-white mx-auto mb-4"></div>
+      <p class="text-2xl text-gray-300">IMÁGENES DE NECRO LOOPS</p>
     </div>
 
-    <!-- BOTÓN VOLVER -->
-    <div class="text-center pt-6">
-      <a href="index.html" onclick="playSfx('btn')" class="rpg-btn text-sm px-8 py-4">
-        <span class="core-icon"></span>
-        🠔 VOLVER AL INICIO
-      </a>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- FOTO 4 -->
+      <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto4.jpg', 'NECRO LOOPS - FOTO4.JPG')">
+        <img src="foto4.jpg" alt="Foto 4 - Necro Loops" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto4.jpg+No+Encontrada';">
+        <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
+          <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #04</span>
+          <span class="text-base text-gray-200">foto4.jpg</span>
+        </div>
+      </div>
 
-  </main>
+      <!-- FOTO 5 -->
+      <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto5.jpg', 'NECRO LOOPS - FOTO5.JPG')">
+        <img src="foto5.jpg" alt="Foto 5 - Necro Loops" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto5.jpg+No+Encontrada';">
+        <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
+          <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #05</span>
+          <span class="text-base text-gray-200">foto5.jpg</span>
+        </div>
+      </div>
+
+      <!-- FOTO 6 -->
+      <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto6.jpg', 'NECRO LOOPS - FOTO6.JPG')">
+        <img src="foto6.jpg" alt="Foto 6 - Necro Loops" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto6.jpg+No+Encontrada';">
+        <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
+          <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #06</span>
+          <span class="text-base text-gray-200">foto6.jpg</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 border-t border-white/20 text-center font-mono text-gray-400 text-sm z-10 relative bg-[#0e0e14] mt-20">
+  <footer class="py-12 border-t border-white/20 text-center font-mono text-gray-400 text-sm z-10 relative bg-[#0e0e14]">
     <div class="flex justify-center items-center gap-2 mb-3">
       <span class="core-icon"></span>
-      <span class="text-white font-['Press_Start_2P'] text-xs">DREAMS OF THE FUTURE RPG</span>
+      <span class="text-white font-['Press_Start_2P'] text-xs">DREAMS OF THE FUTURE - NECRO LOOPS</span>
     </div>
     <p>© 2026 DREAMS OF THE FUTURE TEAM. TODOS LOS DERECHOS RESERVADOS.</p>
   </footer>
 
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="max-w-4xl w-full gothic-box-double p-4 bg-[#121218]" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center mb-3 pb-2 border-b border-white/30">
+        <span id="modal-title" class="font-['Press_Start_2P'] text-xs text-white">VISTA PREVIA</span>
+        <button onclick="closeLightbox()" class="text-white font-bold text-xs px-2 py-1 border border-white hover:bg-white hover:text-black transition-all">[X] CERRAR</button>
+      </div>
+      <img id="modal-img" src="" alt="Preview screenshot" class="w-full h-auto max-h-[75vh] object-contain border border-white/40">
+    </div>
+  </div>
+
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // --- SFX AUDIO SYNTHESIZER ---
+    // --- EFECTOS DE SONIDO SINTETIZADOS ---
     let audioCtx = null;
 
     function initAudio() {
@@ -406,7 +484,8 @@
     }
 
     // --- MENÚ TRES PUNTITOS (⋮) ---
-    function toggleDotsMenu() {
+    function toggleDotsMenu(event) {
+      if (event) event.stopPropagation();
       playSfx('btn');
       const dropdown = document.getElementById('dots-dropdown');
       if (dropdown.classList.contains('hidden-menu')) {
@@ -520,6 +599,19 @@
 
     resizeCanvas();
     animateCanvas();
+
+    // --- MODAL DE IMÁGENES ---
+    function openLightbox(imgUrl, title) {
+      playSfx('select');
+      document.getElementById('modal-img').src = imgUrl;
+      document.getElementById('modal-title').innerText = title || 'VISTA PREVIA';
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      playSfx('select');
+      document.getElementById('lightbox-modal').classList.add('hidden');
+    }
   </script>
 </body>
 </html>
