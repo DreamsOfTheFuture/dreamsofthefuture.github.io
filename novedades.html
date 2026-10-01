@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PHC3GQNM');</script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NOVEDADES - DREAMS OF THE FUTURE</title>
 
-  <!-- Favicon (Icono de la pestaña) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="icono.jpg">
 
   <!-- Google Fonts -->
@@ -195,6 +203,10 @@
   </style>
 </head>
 <body class="min-h-screen relative selection:bg-white selection:text-black">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHC3GQNM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- CRT Screen Overlay -->
   <div class="crt-overlay"></div>
@@ -209,7 +221,7 @@
     <div class="relative">
       <button 
         id="dots-menu-btn" 
-        onclick="toggleDotsMenu()" 
+        onclick="toggleDotsMenu(event)" 
         class="flex items-center gap-3 px-4 py-2 border-2 border-white/70 bg-[#1a1a24] hover:bg-white hover:text-black text-white transition-all font-['Press_Start_2P'] text-xs tracking-wider shadow-[3px_3px_0px_#fff]"
         title="Opciones y Accesos Rápidos"
       >
@@ -313,12 +325,41 @@
     <!-- NEWS FEED CONTAINER -->
     <div class="space-y-8 mb-16">
 
-      <!-- CARD DE NOTICIA 1 -->
+      <!-- NOTICIA MÁS RECIENTE -->
       <article class="gothic-card p-8 border-2 border-white/80">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/30 pb-4 mb-6 gap-2">
           <div class="flex items-center gap-3">
             <span class="bg-white text-black font-['Press_Start_2P'] text-[10px] font-bold px-3 py-1">
               [NEW] LATEST
+            </span>
+            <span class="font-['Press_Start_2P'] text-xs text-white">ANUNCIO OFICIAL</span>
+          </div>
+          <span class="font-mono text-base text-gray-300 border border-white/20 px-2 py-0.5 bg-[#121218]">
+            📅 30/09/2026
+          </span>
+        </div>
+
+        <h3 class="font-['Cinzel'] text-2xl md:text-3xl text-white font-bold mb-4 tracking-wide">
+          ¡NOS VEMOS EN LA EXPO TÉCNICA 2026!
+        </h3>
+
+        <p class="text-xl md:text-2xl text-gray-200 normal-case leading-relaxed font-mono">
+          El próximo 20 de noviembre estaremos presentes en la expo de la escuela Técnica Nº4 de Garín. Queremos invitar a todos a pasarse por nuestro stand para probar el juego, conocer de cerca al equipo de desarrollo y contarnos qué les parece.<br><br>
+          Habrá espacio para jugar, hacer preguntas y compartir un rato con nosotros. ¡Los esperamos!
+        </p>
+
+        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-gray-400 font-mono">
+          <span>PUBLICADO POR: AXEL AYALA</span>
+          <span class="flex items-center gap-1.5"><span class="core-icon"></span> ESTADO: ACTIVO</span>
+        </div>
+      </article>
+
+      <!-- NOTICIA ANTERIOR -->
+      <article class="gothic-card p-8 border-2 border-white/80">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/30 pb-4 mb-6 gap-2">
+          <div class="flex items-center gap-3">
+            <span class="border border-white/60 text-white font-['Press_Start_2P'] text-[10px] font-bold px-3 py-1 bg-black/40">
+              ARCHIVADO
             </span>
             <span class="font-['Press_Start_2P'] text-xs text-white">ANUNCIO OFICIAL</span>
           </div>
@@ -340,35 +381,6 @@
           <span class="flex items-center gap-1.5"><span class="core-icon"></span> ESTADO: ACTIVO</span>
         </div>
       </article>
-      <article class="gothic-card p-8 border-2 border-white/80">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/30 pb-4 mb-6 gap-2">
-          <div class="flex items-center gap-3">
-            <span class="bg-white text-black font-['Press_Start_2P'] text-[10px] font-bold px-3 py-1">
-              [NEW] LATEST
-            </span>
-            <span class="font-['Press_Start_2P'] text-xs text-white">ANUNCIO OFICIAL</span>
-          </div>
-          <span class="font-mono text-base text-gray-300 border border-white/20 px-2 py-0.5 bg-[#121218]">
-            📅 30/09/2026
-          </span>
-        </div>
-
-        <h3 class="font-['Cinzel'] text-2xl md:text-3xl text-white font-bold mb-4 tracking-wide">
-          Atencion
-        </h3>
-
-        <p class="text-xl md:text-2xl text-gray-200 normal-case leading-relaxed font-mono">
-          El próximo 20 de noviembre estaremos presentes en la expo de la escuela Tecnica Nº4 de Garin. Queremos invitar a todos a pasarse por nuestro stand para probar el juego, conocer de cerca al equipo de desarrollo y contarnos qué les parece.
-
-Habrá espacio para jugar, hacer preguntas y compartir un rato con nosotros. ¡Los esperamos!
-        </p>
-
-        <div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-gray-400 font-mono">
-          <span>PUBLICADO POR: AXEL AYALA</span>
-          <span class="flex items-center gap-1.5"><span class="core-icon"></span> ESTADO: ACTIVO</span>
-        </div>
-      </article>
-
 
     </div>
 
@@ -435,7 +447,8 @@ Habrá espacio para jugar, hacer preguntas y compartir un rato con nosotros. ¡L
     }
 
     // --- MENÚ TRES PUNTITOS (⋮) ---
-    function toggleDotsMenu() {
+    function toggleDotsMenu(event) {
+      if (event) event.stopPropagation();
       playSfx('btn');
       const dropdown = document.getElementById('dots-dropdown');
       if (dropdown.classList.contains('hidden-menu')) {
