@@ -59,6 +59,38 @@
       position: relative;
     }
 
+    /* ESTILO DEL CONTADOR FLOTANTE EN LA ESQUINA SUPERIOR DERECHA */
+    .contador-top-right {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(22, 22, 32, 0.95);
+      color: #ffffff;
+      padding: 8px 14px;
+      border: 2px solid #ffffff;
+      border-radius: 4px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      z-index: 10000;
+      box-shadow: 3px 3px 0px #ffffff, 0 0 15px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      pointer-events: none; /* Permite hacer clic en elementos debajo si hiciera falta */
+    }
+
+    .contador-top-right .titulo-contador {
+      font-size: 8px;
+      color: #a0a0b5;
+      margin-bottom: 4px;
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    .contador-top-right span.num {
+      color: #ffffff;
+      font-size: 11px;
+    }
+
     /* INTRO OVERLAY */
     #intro-container {
       position: fixed;
@@ -315,6 +347,15 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHC3GQNM"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <!-- CONTADOR DE TIEMPO REGRESIVO EN LA ESQUINA SUPERIOR DERECHA -->
+  <div id="contador-esquina" class="contador-top-right">
+    <span class="titulo-contador">⌛ EXPO EN:</span>
+    <span id="dias" class="num">00</span>d 
+    <span id="horas" class="num">00</span>h 
+    <span id="minutos" class="num">00</span>m 
+    <span id="segundos" class="num">00</span>s
+  </div>
 
   <!-- INTRO CON VIDEO intro.mp4 -->
   <div id="intro-container">
@@ -866,6 +907,33 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // --- LÓGICA DEL CONTADOR DE REGRESIÓN DE LA EXPO ---
+    // Configuración: Año, Mes (10 = Noviembre en JS), Día, Hora, Minuto, Segundo
+    const fechaExpo = new Date(2026, 10, 20, 9, 0, 0).getTime();
+
+    function actualizarContadorExpo() {
+      const ahora = new Date().getTime();
+      const diferencia = fechaExpo - ahora;
+
+      if (diferencia <= 0) {
+        document.getElementById("contador-esquina").innerHTML = "<span class='titulo-contador'>⌛ ESTADO:</span> ¡EN EXPO!";
+        return;
+      }
+
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
+      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
+      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
+      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
+    }
+
+    setInterval(actualizarContadorExpo, 1000);
+    actualizarContadorExpo();
+
     // --- LÓGICA DE CONTROL DE LA INTRO ---
     document.addEventListener("DOMContentLoaded", function() {
       const introContainer = document.getElementById("intro-container");
