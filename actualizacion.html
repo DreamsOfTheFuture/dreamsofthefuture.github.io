@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PHC3GQNM');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DREAMS OF THE FUTURE - Actualizaciones</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Press+Start+2P&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS & Dynamic Animations -->
+  <style>
+    :root {
+      --bg-main: #121218;
+      --bg-card: #1a1a24;
+      --bg-card-hover: #242432;
+      --accent-white: #ffffff;
+      --accent-silver: #c0c0d0;
+      --accent-gray: #707085;
+      --border-light: rgba(255, 255, 255, 0.85);
+      --border-dim: rgba(255, 255, 255, 0.25);
+      --glow-white: rgba(255, 255, 255, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff #121218;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: #f0f0f8;
+      font-family: 'VT323', monospace;
+      text-transform: uppercase;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ESTILO DEL CONTADOR FLOTANTE EN LA ESQUINA SUPERIOR DERECHA */
+    .contador-top-right {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(22, 22, 32, 0.95);
+      color: #ffffff;
+      padding: 8px 14px;
+      border: 2px solid #ffffff;
+      border-radius: 4px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      z-index: 10000;
+      box-shadow: 3px 3px 0px #ffffff, 0 0 15px rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .contador-top-right .titulo-contador {
+      font-size: 8px;
+      color: #a0a0b5;
+      margin-bottom: 4px;
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    .contador-top-right span.num {
+      color: #ffffff;
+      font-size: 11px;
+    }
+
+    /* CRT Scanline Overlay */
+    .crt-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(
+        rgba(255, 255, 255, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      );
+      background-size: 100% 4px;
+      z-index: 99;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* Interactive Animated Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gothic-card {
+      background: linear-gradient(135deg, rgba(26, 26, 36, 0.95), rgba(18, 18, 24, 0.95));
+      border: 2px solid var(--border-dim);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(4px);
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gothic-card:hover {
+      border-color: var(--accent-white);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    .gothic-box-double {
+      border: 3px solid #ffffff;
+      outline: 2px solid #121218;
+      box-shadow: inset 0 0 0 3px #121218, inset 0 0 0 5px #ffffff, 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .rpg-btn {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #1a1a24;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      padding: 14px 28px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      box-shadow: 5px 5px 0px #ffffff;
+      overflow: hidden;
+    }
+
+    .rpg-btn:hover {
+      background-color: #ffffff;
+      color: #121218;
+      box-shadow: 7px 7px 0px #8888a0;
+      transform: translate(-3px, -3px);
+    }
+
+    .core-icon {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: #ffffff;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    /* Three Dots Dropdown Menu Styles */
+    #dots-dropdown {
+      transform-origin: top left;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #dots-dropdown.hidden-menu {
+      opacity: 0;
+      transform: scale(0.9) translateY(-10px);
+      pointer-events: none;
+    }
+
+    #dots-dropdown.visible-menu {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Photo Lightbox Cards */
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--border-dim);
+      transition: all 0.3s ease;
+    }
+
+    .photo-card:hover {
+      border-color: #ffffff;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+    }
+
+    .photo-card img {
+      filter: grayscale(20%) contrast(110%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      filter: grayscale(0%) contrast(105%);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative selection:bg-white selection:text-black">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHC3GQNM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- CONTADOR DE TIEMPO REGRESIVO EN LA ESQUINA SUPERIOR DERECHA -->
+  <div id="contador-esquina" class="contador-top-right">
+    <span class="titulo-contador">⌛ EXPO EN:</span>
+    <span id="dias" class="num">00</span>d 
+    <span id="horas" class="num">00</span>h 
+    <span id="minutos" class="num">00</span>m 
+    <span id="segundos" class="num">00</span>s
+  </div>
+
+  <!-- CRT Screen Overlay -->
+  <div class="crt-overlay"></div>
+
+  <!-- Dynamic Interactive Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- HEADER / NAVIGATION BAR WITH THREE DOTS MENU -->
+  <nav class="sticky top-0 z-50 py-3.5 px-6 bg-[#121218]/90 backdrop-blur-md border-b border-white/20 flex justify-between items-center">
+    
+    <!-- LEFT: THREE DOTS (⋮) DIRECTORY TRIGGER -->
+    <div class="relative">
+      <button 
+        id="dots-menu-btn" 
+        onclick="toggleDotsMenu(event)" 
+        class="flex items-center gap-3 px-4 py-2 border-2 border-white/70 bg-[#1a1a24] hover:bg-white hover:text-black text-white transition-all font-['Press_Start_2P'] text-xs tracking-wider shadow-[3px_3px_0px_#fff]"
+        title="Opciones y Accesos Rápidos"
+      >
+        <span class="text-base font-bold text-white animate-pulse">⋮</span>
+        <span class="hidden sm:inline">MENÚ (⋮)</span>
+      </button>
+
+      <!-- DROPDOWN DIRECTORY -->
+      <div 
+        id="dots-dropdown" 
+        class="hidden-menu absolute top-14 left-0 w-80 bg-[#161620] border-2 border-white gothic-box-double p-5 z-50 text-left font-mono"
+      >
+        <div class="flex items-center justify-between border-b border-white/30 pb-2 mb-3 text-xs text-gray-400">
+          <span>// MENÚ_DESPLEGABLE</span>
+          <span class="text-white font-bold">TERMINAL v2.5</span>
+        </div>
+
+        <div class="space-y-2.5">
+
+          <!-- ENLACE A INICIO (INDEX) -->
+          <a 
+            href="index.html" 
+            onclick="playSfx('select')" 
+            class="flex items-center justify-between p-2.5 border-2 border-white bg-[#2a2a3a] hover:bg-white hover:text-black transition-all group"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="text-sm">🏠</span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight text-white group-hover:text-black">INICIO (HUB)</span>
+            </div>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">IR ➔</span>
+          </a>
+
+          <!-- ENLACE A NOVEDADES.HTML -->
+          <a 
+            href="novedades.html" 
+            onclick="playSfx('select')" 
+            class="flex items-center justify-between p-2.5 border-2 border-white bg-[#2a2a3a] hover:bg-white hover:text-black transition-all group"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="text-sm">📰</span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight text-white group-hover:text-black">NOVEDADES</span>
+            </div>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">VER ➔</span>
+          </a>
+
+          <div class="border-t border-white/20 my-2"></div>
+
+          <div class="text-[10px] text-gray-400 mb-1 font-bold">// SUBJUEGOS EN COMPUS:</div>
+
+          <!-- SUBGAME 1: NECRO LOOPS -->
+          <a 
+            href="necro-loops.html" 
+            onclick="playSfx('select')" 
+            class="flex items-center justify-between p-2.5 border border-white/80 bg-[#222230] hover:bg-white hover:text-black transition-all group"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="core-icon group-hover:bg-black"></span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight">NECRO LOOPS</span>
+            </div>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">JUGAR ➔</span>
+          </a>
+
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-white/20 text-[10px] text-gray-400 text-center">
+          DREAMS OF THE FUTURE SYSTEM ARCHIVE
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN NAV LINKS -->
+    <div class="hidden lg:flex gap-8 text-gray-300 font-['Press_Start_2P'] text-[11px]">
+      <a href="index.html" onclick="playSfx('select')" class="hover:text-white transition-colors">INICIO</a>
+      <a href="index.html#gameplay" onclick="playSfx('select')" class="hover:text-white transition-colors">GAMEPLAY</a>
+      <a href="index.html#fotos" onclick="playSfx('select')" class="hover:text-white transition-colors">FOTOS</a>
+      <a href="index.html#descargar" onclick="playSfx('select')" class="hover:text-white transition-colors">DESCARGAR</a>
+      <a href="index.html#equipo" onclick="playSfx('select')" class="hover:text-white transition-colors">EQUIPO</a>
+    </div>
+
+    <div>
+      <span class="font-['Silkscreen'] text-xs border-2 border-white px-3 py-1 bg-[#1a1a24] text-white shadow-[2px_2px_0px_#fff]">PRIME RPG</span>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN PRINCIPAL DE ACTUALIZACIONES -->
+  <main class="max-w-5xl mx-auto px-6 py-16 z-10 relative">
+    
+    <div class="text-center mb-16">
+      <h1 class="font-['Cinzel'] text-4xl sm:text-6xl text-white font-bold mb-3 tracking-wider">
+        REGISTRO DE ACTUALIZACIONES
+      </h1>
+      <div class="h-1 w-24 bg-white mx-auto mb-4"></div>
+      <p class="text-2xl text-gray-300">FOTOS, DESCRIPCIONES Y UBICACIONES DE CADA CAMBIO</p>
+    </div>
+
+    <!-- CONTENEDOR DE TARJETAS DE ACTUALIZACIÓN -->
+    <div class="space-y-12">
+
+      <!-- TARJETA DE ACTUALIZACIÓN #1 (AHORA CON GIF EN BUCLE) -->
+      <article class="gothic-card p-6 md:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/30 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="core-icon"></span>
+            <h2 class="font-['Press_Start_2P'] text-xs sm:text-sm text-white">ACTUALIZACIÓN DE LA PÁGINA WEB</h2>
+          </div>
+          <span class="font-mono text-xs text-gray-300 bg-[#2a2a3a] px-3 py-1 border border-white/30">FECHA: 25/10/2026</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <!-- GIF DE LA ACTUALIZACIÓN (Haz clic para ampliar) -->
+          <div class="photo-card gothic-box-double p-2 bg-[#121218] cursor-pointer" onclick="openLightbox('actualizacion.gif', 'ACTUALIZACIÓN #1 - VISTA PREVIA ANIMADA')">
+            <img src="actualizacion.gif" alt="Actualización animada GIF" class="w-full h-64 object-cover border border-white/30" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=actualizacion.gif+No+Encontrada';">
+            <div class="absolute inset-0 bg-black/75 opacity-0 hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+              <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">AMPLIAR ANIMACIÓN</span>
+              <span class="text-sm text-gray-300">Haz clic para ver el GIF en grande</span>
+            </div>
+          </div>
+
+          <!-- DESCRIPCIÓN Y UBICACIÓN -->
+          <div class="space-y-6 font-mono">
+            <div>
+              <h3 class="font-['Press_Start_2P'] text-xs text-white mb-2">// ¿QUÉ ES LO QUE PUSE?</h3>
+              <p class="text-xl text-gray-300 normal-case leading-relaxed">
+                Se añadió un nuevo archivo HTML dedicado exclusivamente a mostrar las actualizaciones del proyecto, con tarjetas detalladas para colocar capturas, animaciones y explicaciones.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-['Press_Start_2P'] text-xs text-white mb-2">// ¿DÓNDE LO PODRÍAS ENCONTRAR?</h3>
+              <p class="text-xl text-gray-300 normal-case leading-relaxed">
+                En la esquina superior izquierda, haciendo clic en el botón de <strong>Menú (⋮)</strong> en la barra de navegación de cualquier página del sitio.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- TARJETA DE ACTUALIZACIÓN #2 -->
+      <article class="gothic-card p-6 md:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/30 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="core-icon"></span>
+            <h2 class="font-['Press_Start_2P'] text-xs sm:text-sm text-white">ACTUALIZACIÓN DE LA PÁGINA WEB</h2>
+          </div>
+          <span class="font-mono text-xs text-gray-300 bg-[#2a2a3a] px-3 py-1 border border-white/30">FECHA: 25/10/2026</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <!-- FOTO DE LA ACTUALIZACIÓN (Haz clic para ampliar) -->
+          <div class="photo-card gothic-box-double p-2 bg-[#121218] cursor-pointer" onclick="openLightbox('foto.jpg', 'ACTUALIZACIÓN #2 - VISTA PREVIA')">
+            <img src="foto.jpg" alt="Actualización foto" class="w-full h-64 object-cover border border-white/30" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg+No+Encontrada';">
+            <div class="absolute inset-0 bg-black/75 opacity-0 hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+              <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">AMPLIAR IMAGEN</span>
+              <span class="text-sm text-gray-300">Haz clic para ver en grande</span>
+            </div>
+          </div>
+
+          <!-- DESCRIPCIÓN Y UBICACIÓN -->
+          <div class="space-y-6 font-mono">
+            <div>
+              <h3 class="font-['Press_Start_2P'] text-xs text-white mb-2">// ¿QUÉ ES LO QUE PUSE?</h3>
+              <p class="text-xl text-gray-300 normal-case leading-relaxed">
+                Se añadió un nuevo archivo HTML dedicado exclusivamente a mostrar las actualizaciones del proyecto, con tarjetas detalladas para colocar capturas y explicaciones.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-['Press_Start_2P'] text-xs text-white mb-2">// ¿DÓNDE LO PODRÍAS ENCONTRAR?</h3>
+              <p class="text-xl text-gray-300 normal-case leading-relaxed">
+                En la esquina superior izquierda, haciendo clic en el botón de <strong>Menú (⋮)</strong> en la barra de navegación de cualquier página del sitio.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- FIN DE LAS TARJETAS DE ACTUALIZACIÓN -->
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-white/20 text-center font-mono text-gray-400 text-sm z-10 relative bg-[#0e0e14]">
+    <div class="flex justify-center items-center gap-2 mb-3">
+      <span class="core-icon"></span>
+      <span class="text-white font-['Press_Start_2P'] text-xs">DREAMS OF THE FUTURE RPG</span>
+    </div>
+    <p>© 2026 DREAMS OF THE FUTURE TEAM. TODOS LOS DERECHOS RESERVADOS.</p>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="max-w-4xl w-full gothic-box-double p-4 bg-[#121218]" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center mb-3 pb-2 border-b border-white/30">
+        <span id="modal-title" class="font-['Press_Start_2P'] text-xs text-white">VISTA PREVIA</span>
+        <button onclick="closeLightbox()" class="text-white font-bold text-xs px-2 py-1 border border-white hover:bg-white hover:text-black transition-all">[X] CERRAR</button>
+      </div>
+      <img id="modal-img" src="" alt="Preview screenshot" class="w-full h-auto max-h-[75vh] object-contain border border-white/40">
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- LÓGICA DEL CONTADOR DE REGRESIÓN DE LA EXPO ---
+    const fechaExpo = new Date(2026, 10, 20, 9, 0, 0).getTime();
+
+    function actualizarContadorExpo() {
+      const ahora = new Date().getTime();
+      const diferencia = fechaExpo - ahora;
+
+      if (diferencia <= 0) {
+        document.getElementById("contador-esquina").innerHTML = "<span class='titulo-contador'>⌛ ESTADO:</span> ¡EN EXPO!";
+        return;
+      }
+
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
+      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
+      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
+      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
+    }
+
+    setInterval(actualizarContadorExpo, 1000);
+    actualizarContadorExpo();
+
+    // --- EFECTOS DE SONIDO SINTETIZADOS ---
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playSfx(type) {
+      try {
+        initAudio();
+        if (!audioCtx) return;
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'select') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(350, now);
+          osc.frequency.exponentialRampToValueAtTime(700, now + 0.05);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'btn') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.setValueAtTime(440, now + 0.04);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+          osc.start(now);
+          osc.stop(now + 0.1);
+        }
+      } catch (e) {}
+    }
+
+    // --- MENÚ TRES PUNTITOS (⋮) ---
+    function toggleDotsMenu(event) {
+      if (event) event.stopPropagation();
+      playSfx('btn');
+      const dropdown = document.getElementById('dots-dropdown');
+      if (dropdown.classList.contains('hidden-menu')) {
+        dropdown.classList.remove('hidden-menu');
+        dropdown.classList.add('visible-menu');
+      } else {
+        dropdown.classList.remove('visible-menu');
+        dropdown.classList.add('hidden-menu');
+      }
+    }
+
+    document.addEventListener('click', function(event) {
+      const dotsBtn = document.getElementById('dots-menu-btn');
+      const dropdown = document.getElementById('dots-dropdown');
+      if (dotsBtn && dropdown) {
+        if (!dotsBtn.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.remove('visible-menu');
+          dropdown.classList.add('hidden-menu');
+        }
+      }
+    });
+
+    // --- FONDO INTERACTIVO DE PARTÍCULAS ---
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 120 };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      createParticles();
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.radius = Math.random() * 2 + 1;
+        this.alpha = Math.random() * 0.5 + 0.3;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+        ctx.fill();
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            this.x -= dx * 0.02;
+            this.y -= dy * 0.02;
+          }
+        }
+      }
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.floor((width * height) / 12000);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - dist / 1100})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+
+    resizeCanvas();
+    animateCanvas();
+
+    // --- MODAL DE IMÁGENES ---
+    function openLightbox(imgUrl, title) {
+      playSfx('select');
+      document.getElementById('modal-img').src = imgUrl;
+      document.getElementById('modal-title').innerText = title || 'VISTA PREVIA';
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      playSfx('select');
+      document.getElementById('lightbox-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

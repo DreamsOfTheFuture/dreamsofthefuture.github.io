@@ -21,7 +21,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- VERIFICACIÓN INMEDIATA DE INTRO VISTA (Para evitar destello al volver de novedades.html) -->
+  <!-- VERIFICACIÓN INMEDIATA DE INTRO VISTA -->
   <script>
     if (sessionStorage.getItem("introVista") === "true") {
       document.write('<style>#intro-container { display: none !important; }</style>');
@@ -75,7 +75,7 @@
       box-shadow: 3px 3px 0px #ffffff, 0 0 15px rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(5px);
       text-align: center;
-      pointer-events: none; /* Permite hacer clic en elementos debajo si hiciera falta */
+      pointer-events: none;
     }
 
     .contador-top-right .titulo-contador {
@@ -348,8 +348,8 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- CONTADOR DE TIEMPO REGRESIVO EN LA ESQUINA SUPERIOR DERECHA -->
-  <div id="contador-esquina" class="contador-top-right">
+  <!-- CONTADOR DE TIEMPO REGRESIVO (OCULTO INICIALMENTE DURANTE LA INTRO) -->
+  <div id="contador-esquina" class="contador-top-right hidden">
     <span class="titulo-contador">⌛ EXPO EN:</span>
     <span id="dias" class="num">00</span>d 
     <span id="horas" class="num">00</span>h 
@@ -359,8 +359,6 @@
 
   <!-- INTRO CON VIDEO intro.mp4 -->
   <div id="intro-container">
-    
-    <!-- PANTALLA INICIAL DE INTERACCIÓN -->
     <div id="start-overlay" class="absolute inset-0 z-20 bg-black/90 flex flex-col items-center justify-center p-6 text-center">
       <h2 class="font-['Cinzel'] text-3xl sm:text-5xl text-white font-bold mb-6 tracking-widest">
         DREAMS OF THE FUTURE
@@ -376,13 +374,11 @@
       </button>
     </div>
 
-    <!-- VIDEO INTRO.MP4 -->
     <video id="intro-video" playsinline preload="auto">
       <source src="intro.mp4" type="video/mp4">
       Tu navegador no soporta el reproductor de video.
     </video>
 
-    <!-- BOTÓN DE OMITIR VIDEO EN PANTALLA -->
     <button 
       id="skip-intro-btn"
       onclick="skipIntro()" 
@@ -392,10 +388,7 @@
     </button>
   </div>
 
-  <!-- CRT Screen Overlay -->
   <div class="crt-overlay"></div>
-
-  <!-- Dynamic Interactive Background Canvas -->
   <canvas id="bg-canvas"></canvas>
 
   <!-- HEADER / NAVIGATION BAR WITH THREE DOTS MENU -->
@@ -425,7 +418,7 @@
 
         <div class="space-y-2.5">
 
-          <!-- ENLACE A NOVEDADES.HTML EN LOS TRES PUNTITOS -->
+          <!-- ENLACE A NOVEDADES.HTML -->
           <a 
             href="novedades.html" 
             onclick="playSfx('select')" 
@@ -434,6 +427,19 @@
             <div class="flex items-center gap-2.5">
               <span class="text-sm">📰</span>
               <span class="font-['Press_Start_2P'] text-[10px] tracking-tight text-white group-hover:text-black">NOVEDADES</span>
+            </div>
+            <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">VER ➔</span>
+          </a>
+
+          <!-- ENLACE A ACTUALIZACION.HTML -->
+          <a 
+            href="actualizacion.html" 
+            onclick="playSfx('select')" 
+            class="flex items-center justify-between p-2.5 border-2 border-white bg-[#2a2a3a] hover:bg-white hover:text-black transition-all group"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="text-sm">⚙️</span>
+              <span class="font-['Press_Start_2P'] text-[10px] tracking-tight text-white group-hover:text-black">ACTUALIZACIONES</span>
             </div>
             <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">VER ➔</span>
           </a>
@@ -490,8 +496,6 @@
 
   <!-- HERO SECTION -->
   <section id="inicio" class="relative min-h-[88vh] flex flex-col justify-center items-center text-center px-4 py-16 z-10 border-b border-white/20">
-    
-    <!-- MAIN TITLE -->
     <h1 class="title-gothic text-4xl sm:text-6xl md:text-8xl font-black mb-3 leading-tight">
       DREAMS OF THE FUTURE
     </h1>
@@ -499,7 +503,6 @@
       - OFFICIAL EDITION -
     </h2>
 
-    <!-- INTERACTIVE DIALOG / SYSTEM PROMPT -->
     <div class="max-w-2xl w-full p-6 bg-[#181822]/90 border-2 border-white gothic-box-double mb-10 text-left">
       <div class="flex items-center gap-3 border-b border-white/30 pb-2 mb-3">
         <span class="core-icon animate-pulse"></span>
@@ -525,12 +528,10 @@
         <div>
           <h3 class="font-['Press_Start_2P'] text-sm text-white mb-1">¿BUSCAS NOVEDADES O SUBJUEGOS?</h3>
           <p class="text-gray-300 text-lg normal-case leading-snug">
-            Puedes acceder a la sección de <strong>Novedades</strong> y a los subjuegos haciendo clic en los <strong>tres puntitos (⋮)</strong> en la barra superior.
+            Puedes acceder a la sección de <strong>Novedades</strong>, <strong>Actualizaciones</strong> y a los subjuegos haciendo clic en los <strong>tres puntitos (⋮)</strong> en la barra superior.
           </p>
         </div>
       </div>
-
-      <!-- BOTÓN REDIRIGIR AL MENÚ DE TRES PUNTITOS Y ABRIRLO -->
       <button id="banner-dots-btn" onclick="goToDotsMenu(event)" class="rpg-btn text-xs whitespace-nowrap">
         ABRIR MENÚ (⋮) ➔
       </button>
@@ -595,7 +596,6 @@
       <p class="text-2xl text-gray-300">MUESTRA EN VIVO DEL UNIVERSO DREAMS OF THE FUTURE</p>
     </div>
 
-    <!-- AVISO GAMEPLAY EN DESARROLLO -->
     <div class="gothic-card p-4 mb-6 border border-white/40 text-center font-mono text-sm text-gray-300">
       <p class="mb-2"><strong class="text-white font-['Press_Start_2P'] text-xs">⚠️ GAMEPLAY DEL RPG PRINCIPAL EN DESARROLLO</strong></p>
       <p>Aún no tenemos un gameplay para mostrar. Mientras tanto, puedes ver la info de nuestro subjuego Necro Loops o volver más tarde.</p>
@@ -629,34 +629,23 @@
       <p class="text-2xl text-gray-300">IMÁGENES DEL MUNDO Y SUS TERMINALES</p>
     </div>
 
-    <!-- AVISO CAPTURAS EN DESARROLLO -->
-    <div class="gothic-card p-4 mb-8 max-w-3xl mx-auto text-center font-mono text-sm text-gray-300">
-      <p class="mb-2"><strong class="text-white font-['Press_Start_2P'] text-xs">🖼️ GALERÍA EN DESARROLLO</strong></p>
-      <p>Aún no tenemos fotos para mostrar del RPG principal. Mientras preparamos el material nuevo, ¡puedes explorar el resto de la página!</p>
-      <a href="necro-loops.html#fotos" onclick="playSfx('btn')" class="rpg-btn text-xs mt-4 inline-flex">
-        <span class="core-icon"></span> VER FOTOS DE NECRO LOOPS ➔
-      </a>
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto.jpg', 'CAPTURA #01 - FOTO.JPG')">
-        <img src="foto.jpg" alt="Foto 1" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg+No+Encontrada';">
+        <img src="foto.jpg" alt="Foto 1" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg';">
         <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
           <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #01</span>
           <span class="text-base text-gray-200">foto</span>
         </div>
       </div>
-
       <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto.jpg', 'CAPTURA #02 - FOTO.JPG')">
-        <img src="foto.jpg" alt="Foto 2" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg+No+Encontrada';">
+        <img src="foto.jpg" alt="Foto 2" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg';">
         <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
           <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #02</span>
           <span class="text-base text-gray-200">foto</span>
         </div>
       </div>
-
       <div class="photo-card gothic-card group cursor-pointer" onclick="openLightbox('foto.jpg', 'CAPTURA #03 - FOTO.JPG')">
-        <img src="foto.jpg" alt="Foto 3" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg+No+Encontrada';">
+        <img src="foto.jpg" alt="Foto 3" class="w-full h-64 object-cover" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600/1a1a24/ffffff?text=foto.jpg';">
         <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
           <span class="font-['Press_Start_2P'] text-[10px] text-white mb-1">CAPTURA #03</span>
           <span class="text-base text-gray-200">foto</span>
@@ -678,20 +667,13 @@
         <span class="orbit-item">🠕</span>
         <span class="orbit-item">✦</span>
         <span class="orbit-item">🠕</span>
-        <span class="orbit-item">✦</span>
-        <span class="orbit-item">🠕</span>
       </div>
-
       <div class="p-3 bg-[#1a1a24] border-4 border-white gothic-box-double relative z-10 shadow-2xl">
         <a href="jUEGO.zip" download onclick="playSfx('btn')" class="rpg-btn text-base md:text-xl px-12 py-7">
           <span class="core-icon scale-125"></span>
           DESCARGAR BETA (ZIP)
         </a>
       </div>
-    </div>
-
-    <div class="mt-16 font-mono text-gray-400 text-sm">
-      COMPATIBILIDAD: WINDOWS 10 / 11 | SOPORTE PARA TECLADO, MOUSE Y GAMEPAD
     </div>
   </section>
 
@@ -705,110 +687,17 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          AA
-        </div>
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">AA</div>
         <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">AXEL AYALA</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">WEB DEVELOPER</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Encargado del desarrollo de este sitio web. Se especializa en crear interfaces dinámicas, estructuradas y con estilo retro-futurista.
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: ARQUITECTURA WEB E INTERFAZ
-          </div>
+          <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">AXEL AYALA</h3>
+          <p class="text-gray-300 text-lg normal-case">Web Developer / Arquitectura web e interfaz.</p>
         </div>
       </div>
-
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          AG
-        </div>
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">AG</div>
         <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">AXEL GOMEZ</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">GAME DIRECTOR</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Tiene la visión general del juego y asegura que la programación, diseño, arte y música formen un producto coherente.
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: DIRECTOR & PROGRAMADOR PRINCIPAL
-          </div>
-        </div>
-      </div>
-
-      <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          JP
-        </div>
-        <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">JERONIMO PINTO</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">MÚSICA & OST</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Compositor / Musicalizador: Crea las canciones, loops y bandas sonoras que le dan ambiente y ritmo único al juego.
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: COMPOSITOR DE AUDIO Y SFX
-          </div>
-        </div>
-      </div>
-
-      <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          LF
-        </div>
-        <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">LUCAS FERNANDEZ</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">LEVEL DESIGNER</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Planifica y construye el espacio jugable. Decide la posición de obstáculos, zonas de combate, caminos y plataformas.
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: DISEÑO DE NIVELES Y ESCENARIOS
-          </div>
-        </div>
-      </div>
-
-      <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          EP
-        </div>
-        <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">ELIAN PENZ</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">PIXEL ARTIST</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Responsable de la identidad visual del juego, dibujando detallados elementos gráficos digitales píxel por píxel.
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: ARTISTA PIXEL ART DE ENTORNOS
-          </div>
-        </div>
-      </div>
-
-      <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md">
-          SL
-        </div>
-        <div class="flex-grow text-center sm:text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-            <h3 class="font-['Press_Start_2P'] text-base text-white">SIRIA LOPEZ</h3>
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">SPRITE ARTIST</span>
-          </div>
-          <p class="text-gray-300 text-lg normal-case mb-3">
-            Diseña los personajes y sus animaciones cuadro por cuadro, dando vida al universo de "Dreams of the Future".
-          </p>
-          <div class="text-xs font-mono text-gray-400">
-            ROL: ANIMACIÓN Y DISEÑO DE PERSONAJES
-          </div>
+          <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">AXEL GOMEZ</h3>
+          <p class="text-gray-300 text-lg normal-case">Game Director & Programador Principal.</p>
         </div>
       </div>
     </div>
@@ -822,44 +711,13 @@
       <p class="text-2xl text-gray-300">NUESTRA FOTO GRUPAL Y LAS INSTITUCIONES QUE NOS AVALAN</p>
     </div>
 
-    <!-- FOTO DEL GRUPO -->
     <div class="mb-16">
       <h3 class="font-['Press_Start_2P'] text-sm text-white mb-6 text-center">// FOTO OFICIAL DEL GRUPO</h3>
-      
       <div class="photo-card gothic-card max-w-4xl mx-auto group cursor-pointer p-2 bg-[#161620]" onclick="openLightbox('foto-grupo.jpg', 'FOTO OFICIAL - EQUIPO DE DESARROLLO')">
-        <img 
-          src="foto-grupo.jpg" 
-          alt="Foto del Grupo" 
-          class="w-full h-80 md:h-[450px] object-cover border border-white/30"
-          onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x700/1a1a24/ffffff?text=foto-grupo.jpg';">
+        <img src="foto-grupo.jpg" alt="Foto del Grupo" class="w-full h-80 md:h-[450px] object-cover border border-white/30" onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x700/1a1a24/ffffff?text=foto-grupo.jpg';">
         <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
           <span class="font-['Press_Start_2P'] text-xs text-white mb-1">DREAMS OF THE FUTURE CREW</span>
           <span class="text-lg text-gray-200">Haz clic para ampliar la foto del equipo</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ESCUELAS Y LOGOS -->
-    <div>
-      <h3 class="font-['Press_Start_2P'] text-sm text-white mb-6 text-center">INSTITUCIÓN</h3>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-        <div class="gothic-card p-6 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-          <div class="w-28 h-28 border-2 border-white bg-[#1a1a24] flex-shrink-0 flex items-center justify-center p-2 gothic-box-double">
-            <img 
-              src="tecnica4.jpg" 
-              alt="Logo E.E.S.T N°4" 
-              class="w-full h-full object-contain"
-              onerror="this.onerror=null; this.src='https://via.placeholder.com/150/1a1a24/ffffff?text=Logo+Escuela';">
-          </div>
-          <div class="flex-grow">
-            <span class="bg-white text-black text-[10px] font-bold px-2 py-0.5 font-mono">INSTITUCIÓN EDUCATIVA</span>
-            <h4 class="font-['Press_Start_2P'] text-sm text-white mt-2 mb-2">E.E.S.T Nº4 Garín</h4>
-            <p class="text-gray-300 text-base normal-case mb-2">
-              La escuela no son solo las paredes, es la gente con la que compartís el día a día. Gracias a este grupo increíble de 6to 4ta Informática por hacer que cada jornada valga la pena.
-            </p>
-            <span class="text-xs font-mono text-gray-400">Garín, Buenos Aires</span>
-          </div>
         </div>
       </div>
     </div>
@@ -871,17 +729,10 @@
       <h2 class="font-['Cinzel'] text-4xl text-white font-bold mb-2 tracking-wider">COMUNIDAD Y REDES</h2>
       <p class="text-2xl text-gray-300">SIGUE EL DESARROLLO EN NUESTRAS PLATAFORMAS</p>
     </div>
-
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="https://www.youtube.com/@DreamsOFTheFuture0" target="_blank" onclick="playSfx('select')" class="social-btn">
-        <span>📺</span> YOUTUBE
-      </a>
-      <a href="https://www.instagram.com/dreamsofthefuture.ok?stkn=Ync3encwdHlvcmds" target="_blank" onclick="playSfx('select')" class="social-btn">
-        <span>📷</span> INSTAGRAM
-      </a>
-      <a href="https://www.tiktok.com/@doft04" target="_blank" onclick="playSfx('select')" class="social-btn">
-        <span>💻</span> TIKTOK
-      </a>
+      <a href="https://www.youtube.com/@DreamsOFTheFuture0" target="_blank" class="social-btn"><span>📺</span> YOUTUBE</a>
+      <a href="https://www.instagram.com/dreamsofthefuture.ok" target="_blank" class="social-btn"><span>📷</span> INSTAGRAM</a>
+      <a href="https://www.tiktok.com/@doft04" target="_blank" class="social-btn"><span>💻</span> TIKTOK</a>
     </div>
   </section>
 
@@ -901,14 +752,12 @@
         <span id="modal-title" class="font-['Press_Start_2P'] text-xs text-white">VISTA PREVIA</span>
         <button onclick="closeLightbox()" class="text-white font-bold text-xs px-2 py-1 border border-white hover:bg-white hover:text-black transition-all">[X] CERRAR</button>
       </div>
-      <img id="modal-img" src="" alt="Preview screenshot" class="w-full h-auto max-h-[75vh] object-contain border border-white/40">
+      <img id="modal-img" src="" alt="Preview" class="w-full h-auto max-h-[75vh] object-contain border border-white/40">
     </div>
   </div>
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // --- LÓGICA DEL CONTADOR DE REGRESIÓN DE LA EXPO ---
-    // Configuración: Año, Mes (10 = Noviembre en JS), Día, Hora, Minuto, Segundo
     const fechaExpo = new Date(2026, 10, 20, 9, 0, 0).getTime();
 
     function actualizarContadorExpo() {
@@ -916,7 +765,10 @@
       const diferencia = fechaExpo - ahora;
 
       if (diferencia <= 0) {
-        document.getElementById("contador-esquina").innerHTML = "<span class='titulo-contador'>⌛ ESTADO:</span> ¡EN EXPO!";
+        const contadorElem = document.getElementById("contador-esquina");
+        if (contadorElem) {
+          contadorElem.innerHTML = "<span class='titulo-contador'>⌛ ESTADO:</span> ¡EN EXPO!";
+        }
         return;
       }
 
@@ -925,28 +777,33 @@
       const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
       const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
-      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
-      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
-      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
+      const dElem = document.getElementById("dias");
+      const hElem = document.getElementById("horas");
+      const mElem = document.getElementById("minutos");
+      const sElem = document.getElementById("segundos");
+
+      if (dElem) dElem.innerText = String(dias).padStart(2, '0');
+      if (hElem) hElem.innerText = String(horas).padStart(2, '0');
+      if (mElem) mElem.innerText = String(minutos).padStart(2, '0');
+      if (sElem) sElem.innerText = String(segundos).padStart(2, '0');
     }
 
     setInterval(actualizarContadorExpo, 1000);
     actualizarContadorExpo();
 
-    // --- LÓGICA DE CONTROL DE LA INTRO ---
     document.addEventListener("DOMContentLoaded", function() {
       const introContainer = document.getElementById("intro-container");
       const video = document.getElementById("intro-video");
+      const contadorEsquina = document.getElementById("contador-esquina");
 
       if (sessionStorage.getItem("introVista") === "true") {
         if (introContainer) introContainer.style.display = "none";
-      } else {
-        if (video) {
-          video.addEventListener("ended", function() {
-            skipIntro();
-          });
-        }
+        // Si ya vio la intro antes, mostramos el contador de inmediato
+        if (contadorEsquina) contadorEsquina.classList.remove("hidden");
+      } else if (video) {
+        video.addEventListener("ended", function() {
+          skipIntro();
+        });
       }
     });
 
@@ -974,6 +831,10 @@
       playSfx('select');
       const introContainer = document.getElementById("intro-container");
       const video = document.getElementById("intro-video");
+      const contadorEsquina = document.getElementById("contador-esquina");
+
+      // Mostramos el contador al terminar/omitir la intro
+      if (contadorEsquina) contadorEsquina.classList.remove("hidden");
 
       if (video) video.pause();
       if (introContainer) {
@@ -984,190 +845,110 @@
       }
     }
 
-    // --- EFECTOS DE SONIDO SINTETIZADOS ---
     let audioCtx = null;
-
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
-
     function playSfx(type) {
       try {
-        initAudio();
-        if (!audioCtx) return;
-
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-
         const now = audioCtx.currentTime;
-
         if (type === 'select') {
-          osc.type = 'square';
           osc.frequency.setValueAtTime(350, now);
           osc.frequency.exponentialRampToValueAtTime(700, now + 0.05);
           gain.gain.setValueAtTime(0.04, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-          osc.start(now);
-          osc.stop(now + 0.05);
+          osc.start(now); osc.stop(now + 0.05);
         } else if (type === 'btn') {
-          osc.type = 'triangle';
           osc.frequency.setValueAtTime(220, now);
-          osc.frequency.setValueAtTime(440, now + 0.04);
           gain.gain.setValueAtTime(0.08, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-          osc.start(now);
-          osc.stop(now + 0.1);
+          osc.start(now); osc.stop(now + 0.1);
         }
       } catch (e) {}
     }
 
-    // --- MENÚ TRES PUNTITOS (⋮) ---
     function toggleDotsMenu(event) {
       if (event) event.stopPropagation();
       playSfx('btn');
       const dropdown = document.getElementById('dots-dropdown');
-      if (dropdown.classList.contains('hidden-menu')) {
-        dropdown.classList.remove('hidden-menu');
-        dropdown.classList.add('visible-menu');
-      } else {
-        dropdown.classList.remove('visible-menu');
-        dropdown.classList.add('hidden-menu');
-      }
+      dropdown.classList.toggle('hidden-menu');
+      dropdown.classList.toggle('visible-menu');
     }
 
-    // --- REDIRIGIR AL MENÚ Y ABRIRLO DE INMEDIATO ---
     function goToDotsMenu(event) {
       if (event) event.stopPropagation();
       playSfx('btn');
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       const dropdown = document.getElementById('dots-dropdown');
-      if (dropdown) {
-        dropdown.classList.remove('hidden-menu');
-        dropdown.classList.add('visible-menu');
-      }
+      dropdown.classList.remove('hidden-menu');
+      dropdown.classList.add('visible-menu');
     }
 
     document.addEventListener('click', function(event) {
       const dotsBtn = document.getElementById('dots-menu-btn');
-      const bannerBtn = document.getElementById('banner-dots-btn');
       const dropdown = document.getElementById('dots-dropdown');
-      if (dotsBtn && dropdown) {
-        if (!dotsBtn.contains(event.target) && !dropdown.contains(event.target) && (!bannerBtn || !bannerBtn.contains(event.target))) {
-          dropdown.classList.remove('visible-menu');
-          dropdown.classList.add('hidden-menu');
-        }
+      if (dotsBtn && dropdown && !dotsBtn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('visible-menu');
+        dropdown.classList.add('hidden-menu');
       }
     });
 
-    // --- FONDO INTERACTIVO DE PARTÍCULAS ---
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-
-    let width, height;
-    let particles = [];
+    let width, height, particles = [];
     let mouse = { x: null, y: null, radius: 120 };
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      createParticles();
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.x;
-      mouse.y = e.y;
-    });
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.6;
-        this.vy = (Math.random() - 0.5) * 0.6;
-        this.radius = Math.random() * 2 + 1;
-        this.alpha = Math.random() * 0.5 + 0.3;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-        ctx.fill();
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-
-        if (mouse.x && mouse.y) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius) {
-            this.x -= dx * 0.02;
-            this.y -= dy * 0.02;
-          }
-        }
-      }
-    }
-
-    function createParticles() {
       particles = [];
       const count = Math.floor((width * height) / 12000);
       for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 2 + 1, alpha: Math.random() * 0.5 + 0.3
+        });
       }
     }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
     function animateCanvas() {
       ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+      particles.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
-          let dx = particles[i].x - particles[j].x;
-          let dy = particles[i].y - particles[j].y;
+          let dx = p.x - particles[j].x, dy = p.y - particles[j].y;
           let dist = Math.sqrt(dx * dx + dy * dy);
-
           if (dist < 110) {
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.moveTo(p.x, p.y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - dist / 1100})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
         }
-      }
+      });
       requestAnimationFrame(animateCanvas);
     }
-
     resizeCanvas();
     animateCanvas();
 
-    // --- MODAL DE IMÁGENES ---
-    function openLightbox(imgUrl, title) {
+    function openLightbox(url, title) {
       playSfx('select');
-      document.getElementById('modal-img').src = imgUrl;
-      document.getElementById('modal-title').innerText = title || 'VISTA PREVIA';
+      document.getElementById('modal-img').src = url;
+      document.getElementById('modal-title').innerText = title;
       document.getElementById('lightbox-modal').classList.remove('hidden');
     }
-
     function closeLightbox() {
       playSfx('select');
       document.getElementById('lightbox-modal').classList.add('hidden');
