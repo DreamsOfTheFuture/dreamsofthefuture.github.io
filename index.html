@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-  <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PHC3GQNM');</script>
-  <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DREAMS OF THE FUTURE - Official RPG Hub</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Press+Start+2P&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- VERIFICACIÓN INMEDIATA DE INTRO VISTA -->
   <script>
     if (sessionStorage.getItem("introVista") === "true") {
       document.write('<style>#intro-container { display: none !important; }</style>');
     }
   </script>
 
-  <!-- Custom CSS & Dynamic Animations -->
   <style>
     :root {
       --bg-main: #121218;
@@ -59,7 +53,6 @@
       position: relative;
     }
 
-    /* ESTILO DEL CONTADOR FLOTANTE EN LA ESQUINA SUPERIOR DERECHA */
     .contador-top-right {
       position: fixed;
       top: 15px;
@@ -91,7 +84,6 @@
       font-size: 11px;
     }
 
-    /* INTRO OVERLAY */
     #intro-container {
       position: fixed;
       inset: 0;
@@ -118,7 +110,6 @@
       object-fit: cover;
     }
 
-    /* CRT Scanline Overlay */
     .crt-overlay {
       position: fixed;
       top: 0;
@@ -135,7 +126,6 @@
       opacity: 0.4;
     }
 
-    /* Interactive Animated Background Canvas */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -146,7 +136,6 @@
       pointer-events: none;
     }
 
-    /* Gothic Gray-White Custom Containers */
     .gothic-card {
       background: linear-gradient(135deg, rgba(26, 26, 36, 0.95), rgba(18, 18, 24, 0.95));
       border: 2px solid var(--border-dim);
@@ -168,7 +157,6 @@
       box-shadow: inset 0 0 0 3px #121218, inset 0 0 0 5px #ffffff, 0 0 25px rgba(255, 255, 255, 0.2);
     }
 
-    /* Animated Glitch & Gothic Headers */
     .title-gothic {
       font-family: 'Cinzel', serif;
       letter-spacing: 6px;
@@ -184,7 +172,6 @@
       100% { filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.8)); }
     }
 
-    /* Modern Retro RPG Button */
     .rpg-btn {
       font-family: 'Press Start 2P', cursive;
       background-color: #1a1a24;
@@ -231,7 +218,6 @@
       box-shadow: 1px 1px 0px #ffffff;
     }
 
-    /* Core Icon Diamond Glyph */
     .core-icon {
       display: inline-block;
       width: 12px;
@@ -246,7 +232,6 @@
       transform: rotate(90deg) scale(1.3);
     }
 
-    /* Orbiting Animations */
     .orbit-container {
       position: absolute;
       top: 50%;
@@ -277,7 +262,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Photo Lightbox Cards */
     .photo-card {
       position: relative;
       overflow: hidden;
@@ -301,7 +285,6 @@
       transform: scale(1.08);
     }
 
-    /* Three Dots Dropdown Menu Styles */
     #dots-dropdown {
       transform-origin: top left;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -319,7 +302,6 @@
       pointer-events: auto;
     }
 
-    /* Floating Social Buttons */
     .social-btn {
       display: inline-flex;
       align-items: center;
@@ -340,15 +322,17 @@
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
     }
+
+    .pixelated {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
   </style>
 </head>
 <body class="min-h-screen relative selection:bg-white selection:text-black">
-  <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHC3GQNM"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
-  <!-- CONTADOR DE TIEMPO REGRESIVO (OCULTO INICIALMENTE DURANTE LA INTRO) -->
   <div id="contador-esquina" class="contador-top-right hidden">
     <span class="titulo-contador">⌛ EXPO EN:</span>
     <span id="dias" class="num">00</span>d 
@@ -357,7 +341,6 @@
     <span id="segundos" class="num">00</span>s
   </div>
 
-  <!-- INTRO CON VIDEO intro.mp4 -->
   <div id="intro-container">
     <div id="start-overlay" class="absolute inset-0 z-20 bg-black/90 flex flex-col items-center justify-center p-6 text-center">
       <h2 class="font-['Cinzel'] text-3xl sm:text-5xl text-white font-bold mb-6 tracking-widest">
@@ -391,10 +374,8 @@
   <div class="crt-overlay"></div>
   <canvas id="bg-canvas"></canvas>
 
-  <!-- HEADER / NAVIGATION BAR WITH THREE DOTS MENU -->
   <nav class="sticky top-0 z-50 py-3.5 px-6 bg-[#121218]/90 backdrop-blur-md border-b border-white/20 flex justify-between items-center">
     
-    <!-- LEFT: THREE DOTS (⋮) DIRECTORY TRIGGER -->
     <div class="relative">
       <button 
         id="dots-menu-btn" 
@@ -406,19 +387,17 @@
         <span class="hidden sm:inline">MENÚ (⋮)</span>
       </button>
 
-      <!-- DROPDOWN DIRECTORY -->
       <div 
         id="dots-dropdown" 
         class="hidden-menu absolute top-14 left-0 w-80 bg-[#161620] border-2 border-white gothic-box-double p-5 z-50 text-left font-mono"
       >
         <div class="flex items-center justify-between border-b border-white/30 pb-2 mb-3 text-xs text-gray-400">
-          <span>// MENÚ_DESPLEGABLE</span>
+          <span>MENÚ_DESPLEGABLE</span>
           <span class="text-white font-bold">TERMINAL v2.5</span>
         </div>
 
         <div class="space-y-2.5">
 
-          <!-- ENLACE A NOVEDADES.HTML -->
           <a 
             href="novedades.html" 
             onclick="playSfx('select')" 
@@ -431,7 +410,6 @@
             <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">VER ➔</span>
           </a>
 
-          <!-- ENLACE A ACTUALIZACION.HTML -->
           <a 
             href="actualizacion.html" 
             onclick="playSfx('select')" 
@@ -446,9 +424,8 @@
 
           <div class="border-t border-white/20 my-2"></div>
 
-          <div class="text-[10px] text-gray-400 mb-1 font-bold">// SUBJUEGOS EN COMPUS:</div>
+          <div class="text-[10px] text-gray-400 mb-1 font-bold">SUBJUEGOS EN COMPUS:</div>
 
-          <!-- SUBGAME 1: NECRO LOOPS -->
           <a 
             href="necro-loops.html" 
             onclick="playSfx('select')" 
@@ -461,7 +438,6 @@
             <span class="text-[9px] bg-white text-black font-bold px-1.5 py-0.5 group-hover:bg-black group-hover:text-white">JUGAR ➔</span>
           </a>
 
-          <!-- SUBGAME 2: LOCKED -->
           <div class="flex items-center justify-between p-2.5 border border-dashed border-gray-600 bg-black/30 opacity-60">
             <div class="flex items-center gap-2">
               <span class="text-gray-500">🔒</span>
@@ -478,7 +454,6 @@
       </div>
     </div>
 
-    <!-- MAIN NAV LINKS -->
     <div class="hidden lg:flex gap-8 text-gray-300 font-['Press_Start_2P'] text-[11px]">
       <a href="#inicio" onclick="playSfx('select')" class="hover:text-white transition-colors">INICIO</a>
       <a href="#gameplay" onclick="playSfx('select')" class="hover:text-white transition-colors">GAMEPLAY</a>
@@ -488,13 +463,11 @@
       <a href="#redes" onclick="playSfx('select')" class="hover:text-white transition-colors">REDES</a>
     </div>
 
-    <!-- RIGHT BADGE -->
     <div>
       <span class="font-['Silkscreen'] text-xs border-2 border-white px-3 py-1 bg-[#1a1a24] text-white shadow-[2px_2px_0px_#fff]">PRIME RPG</span>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
   <section id="inicio" class="relative min-h-[88vh] flex flex-col justify-center items-center text-center px-4 py-16 z-10 border-b border-white/20">
     <h1 class="title-gothic text-4xl sm:text-6xl md:text-8xl font-black mb-3 leading-tight">
       DREAMS OF THE FUTURE
@@ -518,7 +491,6 @@
     </div>
   </section>
 
-  <!-- BANNER NOTIFICACIÓN DE LOS 3 PUNTITOS -->
   <section class="max-w-5xl mx-auto my-12 px-6 z-10 relative">
     <div class="gothic-card p-6 border-2 border-white/80 bg-[#1a1a26] flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-4">
@@ -538,7 +510,6 @@
     </div>
   </section>
 
-  <!-- SINOPSIS & CARACTERÍSTICAS -->
   <section id="sinopsis" class="max-w-6xl mx-auto px-6 py-20 z-10 relative border-b border-white/20">
     <div class="text-center mb-16">
       <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">SINOPSIS DEL JUEGO</h2>
@@ -588,7 +559,6 @@
     </div>
   </section>
 
-  <!-- VIDEO GAMEPLAY / TRAILER -->
   <section id="gameplay" class="max-w-4xl mx-auto px-6 py-24 z-10 relative border-b border-white/20">
     <div class="text-center mb-12">
       <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">GAMEPLAY & TRAILER</h2>
@@ -621,7 +591,6 @@
     </div>
   </section>
 
-  <!-- FOTOS DEL JUEGO -->
   <section id="fotos" class="max-w-6xl mx-auto px-6 py-24 z-10 relative border-b border-white/20">
     <div class="text-center mb-16">
       <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">GALERÍA DE CAPTURAS</h2>
@@ -654,7 +623,6 @@
     </div>
   </section>
 
-  <!-- DESCARGAR BETA -->
   <section id="descargar" class="max-w-5xl mx-auto px-6 py-28 z-10 relative text-center border-b border-white/20">
     <h2 class="font-['Press_Start_2P'] text-xl md:text-3xl text-white mb-4 leading-relaxed">
       ¡DESCARGA LA BETA DE DREAMS OF THE FUTURE!
@@ -677,7 +645,6 @@
     </div>
   </section>
 
-  <!-- EQUIPO DE DESARROLLO -->
   <section id="equipo" class="max-w-6xl mx-auto px-6 py-24 z-10 relative border-b border-white/20">
     <div class="text-center mb-16">
       <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">EQUIPO DE DESARROLLO</h2>
@@ -687,10 +654,9 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       
-      <!-- AXEL AYALA -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="axel1.jpg" alt="Axel Ayala" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='AA';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55720.jpg" alt="Axel Ayala" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='AA';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">AXEL AYALA</h3>
@@ -698,10 +664,9 @@
         </div>
       </div>
 
-      <!-- AXEL GÓMEZ -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="axel2.jpg" alt="Axel Gómez" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='AG';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55721.jpg" alt="Axel Gómez" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='AG';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">AXEL GÓMEZ</h3>
@@ -709,10 +674,9 @@
         </div>
       </div>
 
-      <!-- LUCAS FERNÁNDEZ -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="lucas.jpg" alt="Lucas Fernández" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='LF';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55722.jpg" alt="Lucas Fernández" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='LF';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">LUCAS FERNÁNDEZ</h3>
@@ -720,10 +684,9 @@
         </div>
       </div>
 
-      <!-- JERÓNIMO PINTO -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="jero.jpg" alt="Jerónimo Pinto" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='JP';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55723.jpg" alt="Jerónimo Pinto" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='JP';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">JERÓNIMO PINTO</h3>
@@ -731,10 +694,9 @@
         </div>
       </div>
 
-      <!-- ELIÁN PENZ -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="elian.jpg" alt="Elián Penz" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='EP';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55724.jpg" alt="Elián Penz" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='EP';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">ELIÁN PENZ</h3>
@@ -742,10 +704,9 @@
         </div>
       </div>
 
-      <!-- SIRIA LÓPEZ -->
       <div class="gothic-card p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center font-['Press_Start_2P'] text-xl text-white shadow-md overflow-hidden">
-          <img src="siria.jpg" alt="Siria López" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerText='SL';">
+        <div class="w-20 h-20 border-2 border-white bg-[#222230] flex-shrink-0 flex items-center justify-center shadow-md overflow-hidden p-1">
+          <img src="55725.jpg" alt="Siria López" class="w-full h-full object-contain pixelated" onerror="this.onerror=null; this.parentElement.innerHTML='SL';">
         </div>
         <div class="flex-grow text-center sm:text-left">
           <h3 class="font-['Press_Start_2P'] text-base text-white mb-2">SIRIA LÓPEZ</h3>
@@ -756,7 +717,6 @@
     </div>
   </section>
 
-  <!-- SECCIÓN: FOTO DEL GRUPO Y ESCUELAS -->
   <section id="equipo-escuelas" class="max-w-6xl mx-auto px-6 py-24 z-10 relative border-b border-white/20">
     <div class="text-center mb-16">
       <h2 class="font-['Cinzel'] text-4xl md:text-5xl text-white font-bold mb-2 tracking-wider">GRUPO Y ESCUELAS</h2>
@@ -765,7 +725,7 @@
     </div>
 
     <div class="mb-16">
-      <h3 class="font-['Press_Start_2P'] text-sm text-white mb-6 text-center">// FOTO OFICIAL DEL GRUPO</h3>
+      <h3 class="font-['Press_Start_2P'] text-sm text-white mb-6 text-center">FOTO OFICIAL DEL GRUPO</h3>
       <div class="photo-card gothic-card max-w-4xl mx-auto group cursor-pointer p-2 bg-[#161620]" onclick="openLightbox('foto-grupo.jpg', 'FOTO OFICIAL - EQUIPO DE DESARROLLO')">
         <img src="foto-grupo.jpg" alt="Foto del Grupo" class="w-full h-80 md:h-[450px] object-cover border border-white/30" onerror="this.onerror=null; this.src='https://via.placeholder.com/1200x700/1a1a24/ffffff?text=foto-grupo.jpg';">
         <div class="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
@@ -776,7 +736,6 @@
     </div>
   </section>
 
-  <!-- SECCIÓN REDES SOCIALES -->
   <section id="redes" class="max-w-5xl mx-auto px-6 py-20 z-10 relative text-center">
     <div class="mb-10">
       <h2 class="font-['Cinzel'] text-4xl text-white font-bold mb-2 tracking-wider">COMUNIDAD Y REDES</h2>
@@ -789,7 +748,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="py-12 border-t border-white/20 text-center font-mono text-gray-400 text-sm z-10 relative bg-[#0e0e14]">
     <div class="flex justify-center items-center gap-2 mb-3">
       <span class="core-icon"></span>
@@ -798,7 +756,6 @@
     <p>© 2026 DREAMS OF THE FUTURE TEAM. TODOS LOS DERECHOS RESERVADOS.</p>
   </footer>
 
-  <!-- LIGHTBOX MODAL -->
   <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
     <div class="max-w-4xl w-full gothic-box-double p-4 bg-[#121218]" onclick="event.stopPropagation()">
       <div class="flex justify-between items-center mb-3 pb-2 border-b border-white/30">
@@ -809,7 +766,6 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
   <script>
     const fechaExpo = new Date(2026, 10, 20, 9, 0, 0).getTime();
 
@@ -851,7 +807,6 @@
 
       if (sessionStorage.getItem("introVista") === "true") {
         if (introContainer) introContainer.style.display = "none";
-        // Si ya vio la intro antes, mostramos el contador de inmediato
         if (contadorEsquina) contadorEsquina.classList.remove("hidden");
       } else if (video) {
         video.addEventListener("ended", function() {
@@ -886,7 +841,6 @@
       const video = document.getElementById("intro-video");
       const contadorEsquina = document.getElementById("contador-esquina");
 
-      // Mostramos el contador al terminar/omitir la intro
       if (contadorEsquina) contadorEsquina.classList.remove("hidden");
 
       if (video) video.pause();
